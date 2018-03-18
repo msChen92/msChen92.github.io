@@ -1,38 +1,64 @@
-+---
-title:Hello World.
 ---
-一个人的孤独.
+title: nihao
+---
 
-## Quick Start
+# Node.js 第8天课程笔记
 
-### Create a new post
+## 知识点
 
-``` bash
-$ hexo new "My New Post"
-```
+- 综合案例
+- 异步编程
+  + Promise
+  + async
+- Node.js 聊天室案例
+  + WebSocket 通信，专门做实时通信的
+  + Socket.io 通信框架
+- 爬虫
+- 使用 Node 开发桌面应用
+- 应用开发工程师
+  + 模块被造出来
+  + 玩儿七巧板
 
-More info: [Writing](https://hexo.io/docs/writing.html)
+---
 
-### Run server
+## 复习
 
-``` bash
-$ hexo server
-```
+- npm scripts
+- JavaScript 代码风格
+- eslint
+- ECMAScript 6 类语法
+  + class
+  + 构造函数 constructor
+  + 实例方法
+  + 静态方法 static
+- 客户端分页
+  + 1. 接口支持分页
+    * page
+    * limit
+  + 2. 在客户端处理页码
 
-More info: [Server](https://hexo.io/docs/server.html)
+---
 
-### Generate static files
+## 反馈
 
-``` bash
-$ hexo generate
-```
+---
 
-More info: [Generating](https://hexo.io/docs/generating.html)
+## 上午总结
 
-### Deploy to remote sites
+- Promise
+  + 语法
+  + 异常处理
+- async
+  + 语法
 
-``` bash
-$ hexo deploy
-```
+---
 
-More info: [Deployment](https://hexo.io/docs/deployment.html)
+## 下午总结
+
+---
+
+## 总结
+
+---
+
+## 反馈目标
