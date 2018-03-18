@@ -3,15 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>一个人的旅程</title>
+  <title>http协商缓存VS强缓存 | 一个人的旅程</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="一个人的旅程">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="浏览器缓存(web性能优化)强缓存（也称本地缓存） 强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache Expires-http1.0的规范 绝对时间的GMT格式的时间字符串，当服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http协商缓存VS强缓存">
+<meta property="og:url" content="http://yoursite.com/2018/03/18/http协商缓存VS强缓存/index.html">
 <meta property="og:site_name" content="一个人的旅程">
+<meta property="og:description" content="浏览器缓存(web性能优化)强缓存（也称本地缓存） 强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache Expires-http1.0的规范 绝对时间的GMT格式的时间字符串，当服务">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-18T13:45:09.777Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个人的旅程">
+<meta name="twitter:title" content="http协商缓存VS强缓存">
+<meta name="twitter:description" content="浏览器缓存(web性能优化)强缓存（也称本地缓存） 强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache Expires-http1.0的规范 绝对时间的GMT格式的时间字符串，当服务">
   
     <link rel="alternate" href="/atom.xml" title="一个人的旅程" type="application/atom+xml">
   
@@ -60,59 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Http缓存机制" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/18/Http缓存机制/" class="article-date">
-  <time datetime="2018-03-18T13:45:09.777Z" itemprop="datePublished">2018-03-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/18/Http缓存机制/">Http缓存机制</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="基于缓存策略三要素分解法"><a href="#基于缓存策略三要素分解法" class="headerlink" title="基于缓存策略三要素分解法"></a>基于缓存策略三要素分解法</h1><h2 id="缓存存储策略"><a href="#缓存存储策略" class="headerlink" title="缓存存储策略"></a>缓存存储策略</h2><pre><code>- 用来确定 Http 响应内容是否可以被客户端缓存，以及可以被哪些客户端缓存
-
-- Cache-Control 的值：设定是否被哪些设备缓存 Public、Private、no-cache、max-age 、no-store
-</code></pre><hr>
-<h2 id="缓存过期策略"><a href="#缓存过期策略" class="headerlink" title="缓存过期策略"></a>缓存过期策略</h2><pre><code>- 客户端用来确认存储在本地的缓存数据是否已过期，进而决定是否要发请求到服务端获取数据
-- Expires指定缓存数据的有效时间，有效时间后，本地缓存作废
-    + Cache-Control的值：no-cache和max-age，既包含缓存存储策略也包含缓存过期策略
-    + Cache-Control:no-cache和Cache-Control:max-age=0的效果是一样的
-    + no-cache不建议缓存，但是还是会缓存的
-</code></pre><hr>
-<h2 id="缓存对比策略"><a href="#缓存对比策略" class="headerlink" title="缓存对比策略"></a>缓存对比策略</h2><pre><code>- 缓存在客户端的数据标识发往服务端，服务端通过标识来判断客户端 缓存数据是否仍有效，进而决定是否要重发数据。
-- 客户端检测到数据过期或浏览器刷新之后，会重新发起一个http去请求，服务器会判断请求头有没有标识（If-Modified-Since、If-None-Match），标识有效，就返回304客户端读取本队缓存数据【必须要在首次响应时输出相应的头信息Last-Modified、ETags到客户端】
-</code></pre><h3 id="在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略"><a href="#在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略" class="headerlink" title="在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略"></a>在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略</h3><pre><code>- 在响应头中2个事件字段Date和Last-Modified之间的时间插值取10%作为缓存时间周期
-</code></pre><p><a href="http://mp.weixin.qq.com/s/qOMO0LIdA47j3RjhbCWUEQ?utm_source=caibaojian.com" target="_blank" rel="noopener">more</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/18/Http缓存机制/" data-id="cjewutr4n0000d9x6h714ckeb" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-http协商缓存VS强缓存" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-http协商缓存VS强缓存" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/18/http协商缓存VS强缓存/" class="article-date">
   <time datetime="2018-03-18T13:45:09.777Z" itemprop="datePublished">2018-03-18</time>
@@ -125,8 +77,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/18/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+    <h1 class="article-title" itemprop="name">
+      http协商缓存VS强缓存
     </h1>
   
 
@@ -187,10 +139,23 @@
     </footer>
   </div>
   
-</article>
-
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/18/Http缓存机制/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Http缓存机制
+        
+      </div>
+    </a>
+  
+  
+</nav>
 
   
+</article>
 
 </section>
         
