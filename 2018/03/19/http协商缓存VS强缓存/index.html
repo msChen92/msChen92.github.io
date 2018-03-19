@@ -5,17 +5,17 @@
   
   <title>http协商缓存VS强缓存 | 一个人的旅程</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="浏览器缓存(web性能优化)强缓存（也称本地缓存） 强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache Expires-http1.0的规范 绝对时间的GMT格式的时间字符串，当服务">
+  <meta name="description" content="浏览器缓存(web性能优化)强缓存（也称本地缓存） 强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache  Expires-http1.0的规范  绝对时间的GMT格式的时间字符串，当">
 <meta property="og:type" content="article">
 <meta property="og:title" content="http协商缓存VS强缓存">
-<meta property="og:url" content="http://yoursite.com/2018/03/18/http协商缓存VS强缓存/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/http协商缓存VS强缓存/index.html">
 <meta property="og:site_name" content="一个人的旅程">
-<meta property="og:description" content="浏览器缓存(web性能优化)强缓存（也称本地缓存） 强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache Expires-http1.0的规范 绝对时间的GMT格式的时间字符串，当服务">
+<meta property="og:description" content="浏览器缓存(web性能优化)强缓存（也称本地缓存） 强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache  Expires-http1.0的规范  绝对时间的GMT格式的时间字符串，当">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-18T13:45:09.777Z">
+<meta property="og:updated_time" content="2018-03-19T03:36:09.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http协商缓存VS强缓存">
-<meta name="twitter:description" content="浏览器缓存(web性能优化)强缓存（也称本地缓存） 强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache Expires-http1.0的规范 绝对时间的GMT格式的时间字符串，当服务">
+<meta name="twitter:description" content="浏览器缓存(web性能优化)强缓存（也称本地缓存） 强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache  Expires-http1.0的规范  绝对时间的GMT格式的时间字符串，当">
   
     <link rel="alternate" href="/atom.xml" title="一个人的旅程" type="application/atom+xml">
   
@@ -66,8 +66,8 @@
       <div class="outer">
         <section id="main"><article id="post-http协商缓存VS强缓存" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/18/http协商缓存VS强缓存/" class="article-date">
-  <time datetime="2018-03-18T13:45:09.777Z" itemprop="datePublished">2018-03-18</time>
+    <a href="/2018/03/19/http协商缓存VS强缓存/" class="article-date">
+  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
 </a>
     
   </div>
@@ -87,12 +87,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="浏览器缓存-web性能优化"><a href="#浏览器缓存-web性能优化" class="headerlink" title="浏览器缓存(web性能优化)"></a>浏览器缓存(web性能优化)</h1><h2 id="强缓存（也称本地缓存）"><a href="#强缓存（也称本地缓存）" class="headerlink" title="强缓存（也称本地缓存）"></a>强缓存（也称本地缓存）</h2><ul>
-<li>强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。<br>强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。<br>浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache<ul>
-<li>Expires-http1.0的规范<ul>
+<li><p>强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。<br>强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。<br>浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache</p>
+<ul>
+<li><p>Expires-http1.0的规范</p>
+<ul>
 <li>绝对时间的GMT格式的时间字符串，当服务器与客户端时间偏差较大时，就会导致缓存混乱</li>
 </ul>
 </li>
-<li>Cache-Control-http1.1的规范<ul>
+<li><p>Cache-Control-http1.1的规范</p>
+<ul>
 <li>cache-control:max-age=691200,主要是利用该字段的相对时间值max-age</li>
 <li>Cache-Control与Expires可以在服务端配置同时启用，同时启用的时候Cache-Control优先级高。</li>
 <li>除了max-age的字段外还有其他字段值：no-cache[不使用本地缓存]，no-stroe[禁止浏览器缓存数据]，public[可以被所有用户缓存]，private[只能被终端用户的浏览器缓存]</li>
@@ -106,7 +109,8 @@
 <li>由服务器来确定缓存资源是否可用，客户端与服务器端要通过某种标识来进行通信，让服务器判断请求资源是否可以缓存访问。</li>
 <li><p>主要涉及到两组header字段：Etag和If-None-Match、Last-Modified和If-Modified-Since</p>
 <ul>
-<li>Etag和If-None-Match<ul>
+<li><p>Etag和If-None-Match</p>
+<ul>
 <li>Etag/If-None-Match返回一个校验码。ETag可以保证每一个资源是唯一的，资源变化都会导致ETag变化，服务器根据浏览器上送的If-None-Match值来判断是否命中缓存。</li>
 <li>与Last-Modified不一样的是，当服务器返回304 Not Modified的响应时，由于ETag重新生成过，response header中还会把这个ETag返回，即使这个ETag跟之前的没有变化。</li>
 </ul>
@@ -124,16 +128,15 @@
 <li>文件修改频繁，if-Modified-Since能检查到的粒度是S级的，这种修改无法判断(UNIX只能到秒)</li>
 </ul>
 </li>
-<li>Last-Modified与ETag同时使用，服务器会优先验证ETag，一致的情况下，才会继续比对Last-Modified，最后才决定是否返回304。<br>-</li>
+<li>Last-Modified与ETag同时使用，服务器会优先验证ETag，一致的情况下，才会继续比对Last-Modified，最后才决定是否返回304。</li>
 </ul>
 </li>
 </ul>
-<hr>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/18/http协商缓存VS强缓存/" data-id="cjewutr4v0001d9x6deh0k5m4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/19/http协商缓存VS强缓存/" data-id="cjexohzbd0003d7xf5wsrzc5o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -142,7 +145,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/03/18/Http缓存机制/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/19/git和svn的区别/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -151,6 +154,11 @@
       </div>
     </a>
   
+  
+    <a href="/2018/03/19/webpack/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Http缓存机制</div>
+    </a>
   
 </nav>
 
@@ -186,11 +194,23 @@
       <ul>
         
           <li>
-            <a href="/2018/03/18/Http缓存机制/">Http缓存机制</a>
+            <a href="/2018/03/19/Http缓存机制/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/18/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+            <a href="/2018/03/19/XSS攻击和csrf攻击/">XSS攻击和csrf攻击</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git和svn的区别/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/webpack/">Http缓存机制</a>
           </li>
         
       </ul>

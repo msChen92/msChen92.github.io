@@ -64,8 +64,8 @@
   
     <article id="post-Http缓存机制" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/18/Http缓存机制/" class="article-date">
-  <time datetime="2018-03-18T13:45:09.777Z" itemprop="datePublished">2018-03-18</time>
+    <a href="/2018/03/19/Http缓存机制/" class="article-date">
+  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/18/Http缓存机制/">Http缓存机制</a>
+      <a class="article-title" href="/2018/03/19/Http缓存机制/">Http缓存机制</a>
     </h1>
   
 
@@ -84,25 +84,151 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="基于缓存策略三要素分解法"><a href="#基于缓存策略三要素分解法" class="headerlink" title="基于缓存策略三要素分解法"></a>基于缓存策略三要素分解法</h1><h2 id="缓存存储策略"><a href="#缓存存储策略" class="headerlink" title="缓存存储策略"></a>缓存存储策略</h2><pre><code>- 用来确定 Http 响应内容是否可以被客户端缓存，以及可以被哪些客户端缓存
-
-- Cache-Control 的值：设定是否被哪些设备缓存 Public、Private、no-cache、max-age 、no-store
-</code></pre><hr>
-<h2 id="缓存过期策略"><a href="#缓存过期策略" class="headerlink" title="缓存过期策略"></a>缓存过期策略</h2><pre><code>- 客户端用来确认存储在本地的缓存数据是否已过期，进而决定是否要发请求到服务端获取数据
-- Expires指定缓存数据的有效时间，有效时间后，本地缓存作废
-    + Cache-Control的值：no-cache和max-age，既包含缓存存储策略也包含缓存过期策略
-    + Cache-Control:no-cache和Cache-Control:max-age=0的效果是一样的
-    + no-cache不建议缓存，但是还是会缓存的
-</code></pre><hr>
-<h2 id="缓存对比策略"><a href="#缓存对比策略" class="headerlink" title="缓存对比策略"></a>缓存对比策略</h2><pre><code>- 缓存在客户端的数据标识发往服务端，服务端通过标识来判断客户端 缓存数据是否仍有效，进而决定是否要重发数据。
-- 客户端检测到数据过期或浏览器刷新之后，会重新发起一个http去请求，服务器会判断请求头有没有标识（If-Modified-Since、If-None-Match），标识有效，就返回304客户端读取本队缓存数据【必须要在首次响应时输出相应的头信息Last-Modified、ETags到客户端】
-</code></pre><h3 id="在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略"><a href="#在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略" class="headerlink" title="在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略"></a>在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略</h3><pre><code>- 在响应头中2个事件字段Date和Last-Modified之间的时间插值取10%作为缓存时间周期
-</code></pre><p><a href="http://mp.weixin.qq.com/s/qOMO0LIdA47j3RjhbCWUEQ?utm_source=caibaojian.com" target="_blank" rel="noopener">more</a></p>
+        <h1 id="基于缓存策略三要素分解法"><a href="#基于缓存策略三要素分解法" class="headerlink" title="基于缓存策略三要素分解法"></a>基于缓存策略三要素分解法</h1><h2 id="缓存存储策略"><a href="#缓存存储策略" class="headerlink" title="缓存存储策略"></a>缓存存储策略</h2><ul>
+<li><p>用来确定 Http 响应内容是否可以被客户端缓存，以及可以被哪些客户端缓存</p>
+</li>
+<li><p>Cache-Control 的值：设定是否被哪些设备缓存 Public、Private、no-cache、max-age 、no-store</p>
+</li>
+</ul>
+<hr>
+<h2 id="缓存过期策略"><a href="#缓存过期策略" class="headerlink" title="缓存过期策略"></a>缓存过期策略</h2><ul>
+<li><p>客户端用来确认存储在本地的缓存数据是否已过期，进而决定是否要发请求到服务端获取数据</p>
+</li>
+<li><p>Expires指定缓存数据的有效时间，有效时间后，本地缓存作废</p>
+<pre><code>+ Cache-Control的值：no-cache和max-age，既包含缓存存储策略也包含缓存过期策略
++ Cache-Control:no-cache和Cache-Control:max-age=0的效果是一样的
++ no-cache不建议缓存，但是还是会缓存的
+</code></pre></li>
+</ul>
+<hr>
+<h2 id="缓存对比策略"><a href="#缓存对比策略" class="headerlink" title="缓存对比策略"></a>缓存对比策略</h2><ul>
+<li><p>缓存在客户端的数据标识发往服务端，服务端通过标识来判断客户端 缓存数据是否仍有效，进而决定是否要重发数据。</p>
+</li>
+<li><p>客户端检测到数据过期或浏览器刷新之后，会重新发起一个http去请求，服务器会判断请求头有没有标识（If-Modified-Since、If-None-Match），标识有效，就返回304客户端读取本队缓存数据【必须要在首次响应时输出相应的头信息Last-Modified、ETags到客户端】</p>
+</li>
+</ul>
+<h3 id="在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略"><a href="#在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略" class="headerlink" title="在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略"></a>在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略</h3><ul>
+<li>在响应头中2个事件字段Date和Last-Modified之间的时间插值取10%作为缓存时间周期</li>
+</ul>
+<p><a href="http://mp.weixin.qq.com/s/qOMO0LIdA47j3RjhbCWUEQ?utm_source=caibaojian.com" target="_blank" rel="noopener">more</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/18/Http缓存机制/" data-id="cjewutr4n0000d9x6h714ckeb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/19/Http缓存机制/" data-id="cjexohzay0000d7xfv0z5vkd9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-XSS攻击和csrf攻击" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/19/XSS攻击和csrf攻击/" class="article-date">
+  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/19/XSS攻击和csrf攻击/">XSS攻击和csrf攻击</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="XSS攻击和csrf攻击"><a href="#XSS攻击和csrf攻击" class="headerlink" title="XSS攻击和csrf攻击"></a>XSS攻击和csrf攻击</h1><h2 id="XSS-Cross-Site-Script"><a href="#XSS-Cross-Site-Script" class="headerlink" title="XSS(Cross Site Script)"></a>XSS(Cross Site Script)</h2><ul>
+<li>跨站脚本攻击：向网页中注入恶意脚本在用户浏览网页时执行恶意脚本的攻击方式<ul>
+<li>反射弧攻击：[经过后端，不经过数据库]诱使用户点击一个嵌入恶意脚本的连接达到攻击的目标</li>
+<li>持久型攻击：[经过后端，经过数据库]将恶意脚本提交到被攻击网站的数据库中，用户浏览网页时，恶意脚本从数据库中被加载到页面执行</li>
+<li>DOM：[不经过后端] dom-xss通过url传入参数去控制触发</li>
+</ul>
+</li>
+</ul>
+<h3 id="防范XSS攻击"><a href="#防范XSS攻击" class="headerlink" title="防范XSS攻击"></a>防范XSS攻击</h3><ul>
+<li>编码，转义用户输入，把用户的输入解读为数据而不是代码</li>
+<li>校验度，对用户的输入及请求进行过滤检查，对特殊字符串进行过滤，设置输入域的匹配规则</li>
+<li>对于持久性和反射型攻击，福区段验证是必须的</li>
+<li>对于基于DOM的XSS攻击，验证输入在客户端必须执行</li>
+<li><p><a href="http://www.freebuf.com/articles/web/9977.html" target="_blank" rel="noopener">防御XSS的七条原则</a></p>
+<hr>
+</li>
+</ul>
+<h2 id="CSRF攻击-Cross-Site-Request-Forgery"><a href="#CSRF攻击-Cross-Site-Request-Forgery" class="headerlink" title="CSRF攻击(Cross Site Request Forgery)"></a>CSRF攻击(Cross Site Request Forgery)</h2><ul>
+<li>跨站请求伪造：攻击者通过跨站请求，以合法的用户身份进行非法操作</li>
+<li>主要原理是利用浏览器的Cookie或服务器的Session盗取用户身份</li>
+</ul>
+<h3 id="防范CSRF的主要手段是：识别请求者身份"><a href="#防范CSRF的主要手段是：识别请求者身份" class="headerlink" title="防范CSRF的主要手段是：识别请求者身份"></a>防范CSRF的主要手段是：识别请求者身份</h3><ul>
+<li>1.在表单中添加令牌（token)</li>
+<li>2.验证码[用户体验糟糕–在短时间内多次提交一个表单而未获得成功后可以要求提供验证码，比较好的用户体验]</li>
+<li>3.检查请求头中的Referer(应用：防图片盗连接)</li>
+</ul>
+<hr>
+<h2 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/19/XSS攻击和csrf攻击/" data-id="cjexohzb50001d7xfijom6p27" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git和svn的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/19/git和svn的区别/" class="article-date">
+  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/19/git和svn的区别/">Http缓存机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="git-和-svn-的区别"><a href="#git-和-svn-的区别" class="headerlink" title="git 和 svn 的区别"></a>git 和 svn 的区别</h1><h2 id="git-是分布-式的版本控制系统"><a href="#git-是分布-式的版本控制系统" class="headerlink" title="git 是分布 式的版本控制系统"></a>git 是分布 式的版本控制系统</h2><ul>
+<li>git 按元数据存储</li>
+<li>内容存储使用SHA-1哈希算法，确保代码的完整性，确保在遇到磁盘故障和网络问题时降低对版本库的控制</li>
+<li>本地不需联网可以看到所有log</li>
+<li>git复制5个版本文件是，获取文件的每个版本的元素，只载入主要的分支</li>
+<li>git 无限个版本库</li>
+</ul>
+<h2 id="svn"><a href="#svn" class="headerlink" title="svn"></a>svn</h2><ul>
+<li>svn按文件存储</li>
+<li>需要联网</li>
+<li>commit之前需要update，否则会发生一些错误</li>
+<li>svn同时复制5个版本的文件需要重复5次同样的动作</li>
+<li>一个指定的中央版本库</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/19/git和svn的区别/" data-id="cjexohzbb0002d7xf7s6ob2cb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,8 +240,8 @@
   
     <article id="post-http协商缓存VS强缓存" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/18/http协商缓存VS强缓存/" class="article-date">
-  <time datetime="2018-03-18T13:45:09.777Z" itemprop="datePublished">2018-03-18</time>
+    <a href="/2018/03/19/http协商缓存VS强缓存/" class="article-date">
+  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
 </a>
     
   </div>
@@ -126,7 +252,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/18/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+      <a class="article-title" href="/2018/03/19/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
     </h1>
   
 
@@ -135,12 +261,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="浏览器缓存-web性能优化"><a href="#浏览器缓存-web性能优化" class="headerlink" title="浏览器缓存(web性能优化)"></a>浏览器缓存(web性能优化)</h1><h2 id="强缓存（也称本地缓存）"><a href="#强缓存（也称本地缓存）" class="headerlink" title="强缓存（也称本地缓存）"></a>强缓存（也称本地缓存）</h2><ul>
-<li>强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。<br>强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。<br>浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache<ul>
-<li>Expires-http1.0的规范<ul>
+<li><p>强缓存是利用http头中的Expires和Cache-Control两个字段来控制的，用来表示资源的缓存时间。<br>强缓存中，普通刷新会忽略它，但不会清除它，需要强制刷新。<br>浏览器强制刷新，请求会带上Cache-Control:no-cache和Pragma:no-cache</p>
+<ul>
+<li><p>Expires-http1.0的规范</p>
+<ul>
 <li>绝对时间的GMT格式的时间字符串，当服务器与客户端时间偏差较大时，就会导致缓存混乱</li>
 </ul>
 </li>
-<li>Cache-Control-http1.1的规范<ul>
+<li><p>Cache-Control-http1.1的规范</p>
+<ul>
 <li>cache-control:max-age=691200,主要是利用该字段的相对时间值max-age</li>
 <li>Cache-Control与Expires可以在服务端配置同时启用，同时启用的时候Cache-Control优先级高。</li>
 <li>除了max-age的字段外还有其他字段值：no-cache[不使用本地缓存]，no-stroe[禁止浏览器缓存数据]，public[可以被所有用户缓存]，private[只能被终端用户的浏览器缓存]</li>
@@ -154,7 +283,8 @@
 <li>由服务器来确定缓存资源是否可用，客户端与服务器端要通过某种标识来进行通信，让服务器判断请求资源是否可以缓存访问。</li>
 <li><p>主要涉及到两组header字段：Etag和If-None-Match、Last-Modified和If-Modified-Since</p>
 <ul>
-<li>Etag和If-None-Match<ul>
+<li><p>Etag和If-None-Match</p>
+<ul>
 <li>Etag/If-None-Match返回一个校验码。ETag可以保证每一个资源是唯一的，资源变化都会导致ETag变化，服务器根据浏览器上送的If-None-Match值来判断是否命中缓存。</li>
 <li>与Last-Modified不一样的是，当服务器返回304 Not Modified的响应时，由于ETag重新生成过，response header中还会把这个ETag返回，即使这个ETag跟之前的没有变化。</li>
 </ul>
@@ -172,16 +302,262 @@
 <li>文件修改频繁，if-Modified-Since能检查到的粒度是S级的，这种修改无法判断(UNIX只能到秒)</li>
 </ul>
 </li>
-<li>Last-Modified与ETag同时使用，服务器会优先验证ETag，一致的情况下，才会继续比对Last-Modified，最后才决定是否返回304。<br>-</li>
+<li>Last-Modified与ETag同时使用，服务器会优先验证ETag，一致的情况下，才会继续比对Last-Modified，最后才决定是否返回304。</li>
 </ul>
 </li>
 </ul>
-<hr>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/18/http协商缓存VS强缓存/" data-id="cjewutr4v0001d9x6deh0k5m4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/19/http协商缓存VS强缓存/" data-id="cjexohzbd0003d7xf5wsrzc5o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/19/webpack/" class="article-date">
+  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/19/webpack/">Http缓存机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h1><h2 id="webpack的优点"><a href="#webpack的优点" class="headerlink" title="webpack的优点"></a>webpack的优点</h2><ul>
+<li><p>虽然webpack的工作模式有点“怪异”，但它的配置功能和扩展能力非常出众，而且相比fis，webpack更专注于构建本身，开发者有很大的空间去改造和扩展；</p>
+</li>
+<li><p>与前端的新技术高度融合，比如Vue、React、Angular（这些框架也是组件化的典范，与webpack的理念有共通点）等，并且与-之对应的loader或plugin是官方或者框架作者推出的，并非“来路不明”的第三方提供；</p>
+</li>
+<li><p>生命周期非常优雅，compiler和compilation拥有各自的生命周期，并且几乎每个阶段都暴露了钩子函数，非常利用扩展；<br>社区力量庞大。这意味着遇到问题时，能够得到更多人的意见和帮助。这一点来讲，fis与webpack的社区力量不是一个量级的。</p>
+</li>
+</ul>
+<hr>
+<h2 id="webpcak转译出的文件过大怎么办"><a href="#webpcak转译出的文件过大怎么办" class="headerlink" title="webpcak转译出的文件过大怎么办"></a>webpcak转译出的文件过大怎么办</h2><ul>
+<li>配置全局变量:告诉webpcak我们处于production环境中</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//指定环境，将process.env.NODE_ENV环境与library关联</span><br><span class="line"> new Webpack.DefinePlugin(&#123;</span><br><span class="line">    &apos;process.env.NODE_ENV&apos;: JSON.stringify(&apos;production&apos;),</span><br><span class="line"> &#125;),</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>优化devtool中的source-map：source-map在开发阶段确实很好用，调试起来很方便，但是在生产环境下就没必要部署了。 </p>
+</li>
+<li><p>剥离css文件，单独打包</p>
+<ul>
+<li>安装webpack插件extract-text-webpack-plugin。 npm install extract-text-webpack-plugin –save-dev。 </li>
+<li>这里使用了contenthash，webpack会根据内容去生成hash值。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> new ExtractTextPlugin(&apos;static/css/styles.[contenthash].css&apos;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用UglifyJSPlugin压缩</p>
+</li>
+<li>提取公共依赖<ul>
+<li>使用CommonsChunkPlugin插件，将多个js文件进行提取，建立一个独立的文件。这个文件包含一些共用模块，浏这样览器只在刚开始的时候加载一次，便缓存起来供后续使用。而不用每次访问一个新界面时，再去加载一个更大的文件。</li>
+</ul>
+</li>
+<li>开启gzip压缩</li>
+<li>开启html压缩，自动添加上面生成的静态资源</li>
+</ul>
+<hr>
+<h2 id="webpack转译速度慢什么办？"><a href="#webpack转译速度慢什么办？" class="headerlink" title="webpack转译速度慢什么办？"></a>webpack转译速度慢什么办？</h2><ul>
+<li>使用webpack –watch</li>
+<li><p>配置externals:忽略文件不打包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">externals: </span><br><span class="line">    &#123;</span><br><span class="line">      &apos;antd&apos;:true,</span><br><span class="line">      &apos;react&apos;: &apos;React&apos;,</span><br><span class="line">      &apos;react-dom&apos;: &apos;ReactDOM&apos;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>配置externals的缺陷:总而言之，问题是这样产生的：<ul>
+<li>Webpack 发现我们依赖了 react-addons-css-transition-group</li>
+<li>Webpack 去打包 react-addons-css-transition-group 的时候发现它依赖了 react 模块下的一个叫 ReactTransitionGroup.js 的文件，于是 Webpack 去打包这个文件。</li>
+<li>ReactTransitionGroup.js 依赖了整个 react 的入口文件 React.js，虽然我们设置了 externals ，但是 Webpack 不知道这个入口文件等效于 react 模块本身，于是我们可爱又敬业的 Webpack 就把整个 react 又重新打包了一遍。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>将那些共有的模块打进另外一个文件中，然后使用CommonsChunkPlugin插件，在webpack –watch非第一编打包的时候就不会重复的打另外一个文件了。</li>
+</ul>
+<hr>
+<h2 id="webpack-loader"><a href="#webpack-loader" class="headerlink" title="webpack loader"></a>webpack loader</h2><ul>
+<li><p>能够对加载的资源文件，进行一些处理。比如把less、sass文件编译成css文件，负责这个处理过程的，就是webpack的loader。</p>
+<ul>
+<li>vue-loader 处理vue组件</li>
+<li>less-loader 处理编译less</li>
+<li>html-loader 加载html文件并打包内链的静态文件</li>
+</ul>
+</li>
+<li><p>loader的本质是接收字符串(或者buffer),再返回处理完的字符串(或者buffer)的过程<br>webpack会将加载的资源作为参数传入loader方法，交于loader处理再返回</p>
+</li>
+<li><p><a href="https://doc.webpack-china.org/contribute/writing-a-loader" target="_blank" rel="noopener">如何编写一个loader</a></p>
+<ul>
+<li><p>在我这个需求中，就是将我加载的html，套在我设定的layout中，再将这个处理完的html返回。大致的代码就是这样：</p>
+<figure class="highlight plain"><figcaption><span>&#123;string&#125; source: 加载的html的字符串值</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.exports = function (source) &#123;</span><br><span class="line">  return getLayoutHtml().replace(&apos;&#123;&#123;__content__&#125;&#125;&apos;, source)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第一步，只要实现一个getLayoutHtml方法，能得到设定的layout.html文件就好。仔细想想，layout文件应该是通过配置声明的，然后在loader里去根据配置，调用node的api去加载文件就好</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  const options = loaderUtils.getOptions(this)</span><br><span class="line">  const layoutHtml = fs.readFileSync(options.layout, &apos;utf-8&apos;)</span><br><span class="line">  return layoutHtml.replace(&apos;&#123;&#123;__content__&#125;&#125;&apos;, source)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>webpack的config增加如下loader配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  test: /\.(html)$/,</span><br><span class="line">  loader: &apos;html-layout-loader&apos;,</span><br><span class="line">  include: htmlPath, // the htmls you want inject to layout</span><br><span class="line">  options: &#123;</span><br><span class="line">    layout: layoutHtmlPath // the path of default layout html</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://github.com/wuomzfx/html-layout-loader" target="_blank" rel="noopener">more</a></p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/19/webpack/" data-id="cjexohzbf0004d7xfn47js0er" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/19/算法/" class="article-date">
+  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/19/算法/">算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
+<li><p>冒泡排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function bubbleSort(arr) &#123;</span><br><span class="line">    var len = arr.length;</span><br><span class="line">    for (var i = 0; i &lt; len; i++) &#123;</span><br><span class="line">        for (var j = 0; j &lt; len - 1 - i; j++) &#123;</span><br><span class="line">            if (arr[j] &gt; arr[j+1]) &#123;        //相邻元素两两对比</span><br><span class="line">                var temp = arr[j+1];        //元素交换</span><br><span class="line">                arr[j+1] = arr[j];</span><br><span class="line">                arr[j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function selectionSort(arr) &#123;</span><br><span class="line">    var len = arr.length;</span><br><span class="line">    var minIndex, temp;</span><br><span class="line">    for (var i = 0; i &lt; len - 1; i++) &#123;</span><br><span class="line">        minIndex = i;</span><br><span class="line">        for (var j = i + 1; j &lt; len; j++) &#123;</span><br><span class="line">            if (arr[j] &lt; arr[minIndex]) &#123;     //寻找最小的数</span><br><span class="line">                minIndex = j;                 //将最小数的索引保存</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        temp = arr[i];</span><br><span class="line">        arr[i] = arr[minIndex];</span><br><span class="line">        arr[minIndex] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>计数排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">- 快速排序</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 插入排序</span><br></pre></td></tr></table></figure>
+<p>function insertionSort(arr) {<br>    var len = arr.length;<br>    var preIndex, current;<br>    for (var i = 1; i &lt; len; i++) {<br>        preIndex = i - 1;<br>        current = arr[i];<br>        while(preIndex &gt;= 0 &amp;&amp; arr[preIndex] &gt; current) {<br>            arr[preIndex+1] = arr[preIndex];<br>            preIndex–;<br>        }<br>        arr[preIndex+1] = current;<br>    }<br>    return arr;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 归并排序</span><br></pre></td></tr></table></figure></p>
+<h2 id=""><a href="#" class="headerlink" title="`"></a><code>`</code></h2><h2 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h2><hr>
+<h2 id="翻转二叉树"><a href="#翻转二叉树" class="headerlink" title="翻转二叉树"></a>翻转二叉树</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/19/算法/" data-id="cjexohzbg0005d7xf62tkt474" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-缓存实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/19/缓存实现/" class="article-date">
+  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/19/缓存实现/">Http缓存机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="缓存实现"><a href="#缓存实现" class="headerlink" title="缓存实现"></a>缓存实现</h1><h2 id="实现方式大致分三类：HTTP协议头控制，Dom-Storage-AppCache"><a href="#实现方式大致分三类：HTTP协议头控制，Dom-Storage-AppCache" class="headerlink" title="实现方式大致分三类：HTTP协议头控制，Dom Storage AppCache"></a>实现方式大致分三类：HTTP协议头控制，Dom Storage AppCache</h2><h3 id="TTP协议头控制-Cache-Control"><a href="#TTP协议头控制-Cache-Control" class="headerlink" title="TTP协议头控制:Cache-Control"></a>TTP协议头控制:Cache-Control</h3><hr>
+<h3 id="Dom-Storage"><a href="#Dom-Storage" class="headerlink" title="Dom Storage"></a>Dom Storage</h3><ul>
+<li><p>sessionStorage对象用来存储与页面相关的数据，它在页面关闭后无法使用</p>
+</li>
+<li><p>localStorage对象持久存在，在页面关闭后也可以使用</p>
+</li>
+<li><p>DomStorage适合存储比较简单的数据，存储结构化的数据，可能要借助JSON了，将要存储的对象转为JSON字串。不太适合存储比较复杂或存储空间要求比较大的数据，也不适合存储静态的文件等。</p>
+</li>
+</ul>
+<hr>
+<h3 id="Application-Cache机制"><a href="#Application-Cache机制" class="headerlink" title="Application Cache机制"></a>Application Cache机制</h3><p>-Application Cache（简称AppCache)似乎是为支持Web App离线使用而开发的缓存机制。它的缓存机制类似于浏览器的缓存（Cache-Control 和 Last-Modified）机制，都是以文件为单位进行缓存，且文件有一定更新机制。但AppCache是对浏览器缓存机制的补充，不是替代。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/19/缓存实现/" data-id="cjexohzbi0006d7xfavxs6zqw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-静态资源优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/19/静态资源优化/" class="article-date">
+  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/19/静态资源优化/">Http缓存机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="静态资源优化方案"><a href="#静态资源优化方案" class="headerlink" title="静态资源优化方案"></a>静态资源优化方案</h1><h2 id="配置超长时间的本地缓存-——-节省带宽，提高性能"><a href="#配置超长时间的本地缓存-——-节省带宽，提高性能" class="headerlink" title="配置超长时间的本地缓存 —— 节省带宽，提高性能"></a>配置超长时间的本地缓存 —— 节省带宽，提高性能</h2><h2 id="采用内容摘要作为缓存更新依据-——-精确的缓存控制"><a href="#采用内容摘要作为缓存更新依据-——-精确的缓存控制" class="headerlink" title="采用内容摘要作为缓存更新依据 —— 精确的缓存控制"></a>采用内容摘要作为缓存更新依据 —— 精确的缓存控制</h2><h2 id="静态资源CDN部署-——-优化网络请求"><a href="#静态资源CDN部署-——-优化网络请求" class="headerlink" title="静态资源CDN部署 —— 优化网络请求"></a>静态资源CDN部署 —— 优化网络请求</h2><h2 id="更资源发布路径实现非覆盖式发布-——-平滑升级"><a href="#更资源发布路径实现非覆盖式发布-——-平滑升级" class="headerlink" title="更资源发布路径实现非覆盖式发布 —— 平滑升级"></a>更资源发布路径实现非覆盖式发布 —— 平滑升级</h2><hr>
+<p>先部署页面，再部署资源：在二者部署的时间间隔内，如果有用户访问页面，就会在新的页面结构中加载旧的资源，并且把这个旧版本的资源当做新版本缓存起来，其结果就是：用户访问到了一个样式错乱的页面，除非手动刷新，否则在资源缓存过期之前，页面会一直执行错误。</p>
+<p>先部署资源，再部署页面：在部署时间间隔之内，有旧版本资源本地缓存的用户访问网站，由于请求的页面是旧版本的，资源引用没有改变，浏览器将直接使用本地缓存，这种情况下页面展现正常；但没有本地缓存或者缓存过期的用户访问网站，就会出现旧版本页面加载新版本资源的情况，导致页面执行错误，但当页面完成部署，这部分用户再次访问页面又会恢复正常了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/19/静态资源优化/" data-id="cjexohzbj0007d7xfxxmawza6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -221,11 +597,23 @@
       <ul>
         
           <li>
-            <a href="/2018/03/18/Http缓存机制/">Http缓存机制</a>
+            <a href="/2018/03/19/Http缓存机制/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/18/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+            <a href="/2018/03/19/XSS攻击和csrf攻击/">XSS攻击和csrf攻击</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git和svn的区别/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/webpack/">Http缓存机制</a>
           </li>
         
       </ul>

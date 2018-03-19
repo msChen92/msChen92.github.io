@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Http缓存机制 | 一个人的旅程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基于缓存策略三要素分解法缓存存储策略 用来确定 Http 响应内容是否可以被客户端缓存，以及可以被哪些客户端缓存  Cache-Control 的值：设定是否被哪些设备缓存 Public、Private、no-cache、max-age 、no-store    缓存过期策略 客户端用来确认存储在本地的缓存数据是否已过期，进而决定是否要发请求到服务端获取数据  Expires指定缓存数据的有效时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Http缓存机制">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/Http缓存机制/index.html">
+<meta property="og:site_name" content="一个人的旅程">
+<meta property="og:description" content="基于缓存策略三要素分解法缓存存储策略 用来确定 Http 响应内容是否可以被客户端缓存，以及可以被哪些客户端缓存  Cache-Control 的值：设定是否被哪些设备缓存 Public、Private、no-cache、max-age 、no-store    缓存过期策略 客户端用来确认存储在本地的缓存数据是否已过期，进而决定是否要发请求到服务端获取数据  Expires指定缓存数据的有效时间">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-19T03:36:09.622Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Http缓存机制">
+<meta name="twitter:description" content="基于缓存策略三要素分解法缓存存储策略 用来确定 Http 响应内容是否可以被客户端缓存，以及可以被哪些客户端缓存  Cache-Control 的值：设定是否被哪些设备缓存 Public、Private、no-cache、max-age 、no-store    缓存过期策略 客户端用来确认存储在本地的缓存数据是否已过期，进而决定是否要发请求到服务端获取数据  Expires指定缓存数据的有效时间">
+  
+    <link rel="alternate" href="/atom.xml" title="一个人的旅程" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">一个人的旅程</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Http缓存机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/19/Http缓存机制/" class="article-date">
+  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Http缓存机制
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="基于缓存策略三要素分解法"><a href="#基于缓存策略三要素分解法" class="headerlink" title="基于缓存策略三要素分解法"></a>基于缓存策略三要素分解法</h1><h2 id="缓存存储策略"><a href="#缓存存储策略" class="headerlink" title="缓存存储策略"></a>缓存存储策略</h2><ul>
+<li><p>用来确定 Http 响应内容是否可以被客户端缓存，以及可以被哪些客户端缓存</p>
+</li>
+<li><p>Cache-Control 的值：设定是否被哪些设备缓存 Public、Private、no-cache、max-age 、no-store</p>
+</li>
+</ul>
+<hr>
+<h2 id="缓存过期策略"><a href="#缓存过期策略" class="headerlink" title="缓存过期策略"></a>缓存过期策略</h2><ul>
+<li><p>客户端用来确认存储在本地的缓存数据是否已过期，进而决定是否要发请求到服务端获取数据</p>
+</li>
+<li><p>Expires指定缓存数据的有效时间，有效时间后，本地缓存作废</p>
+<pre><code>+ Cache-Control的值：no-cache和max-age，既包含缓存存储策略也包含缓存过期策略
++ Cache-Control:no-cache和Cache-Control:max-age=0的效果是一样的
++ no-cache不建议缓存，但是还是会缓存的
+</code></pre></li>
+</ul>
+<hr>
+<h2 id="缓存对比策略"><a href="#缓存对比策略" class="headerlink" title="缓存对比策略"></a>缓存对比策略</h2><ul>
+<li><p>缓存在客户端的数据标识发往服务端，服务端通过标识来判断客户端 缓存数据是否仍有效，进而决定是否要重发数据。</p>
+</li>
+<li><p>客户端检测到数据过期或浏览器刷新之后，会重新发起一个http去请求，服务器会判断请求头有没有标识（If-Modified-Since、If-None-Match），标识有效，就返回304客户端读取本队缓存数据【必须要在首次响应时输出相应的头信息Last-Modified、ETags到客户端】</p>
+</li>
+</ul>
+<h3 id="在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略"><a href="#在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略" class="headerlink" title="在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略"></a>在浏览器没有提供缓存过期策略的时候，遵循一个启发式缓存过期策略</h3><ul>
+<li>在响应头中2个事件字段Date和Last-Modified之间的时间插值取10%作为缓存时间周期</li>
+</ul>
+<p><a href="http://mp.weixin.qq.com/s/qOMO0LIdA47j3RjhbCWUEQ?utm_source=caibaojian.com" target="_blank" rel="noopener">more</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/19/Http缓存机制/" data-id="cjexohzay0000d7xfv0z5vkd9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/19/XSS攻击和csrf攻击/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">XSS攻击和csrf攻击</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/19/Http缓存机制/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/XSS攻击和csrf攻击/">XSS攻击和csrf攻击</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git和svn的区别/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/webpack/">Http缓存机制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 msChen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

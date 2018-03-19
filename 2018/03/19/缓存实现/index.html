@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Http缓存机制 | 一个人的旅程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="缓存实现实现方式大致分三类：HTTP协议头控制，Dom Storage AppCacheTTP协议头控制:Cache-Control Dom Storage sessionStorage对象用来存储与页面相关的数据，它在页面关闭后无法使用  localStorage对象持久存在，在页面关闭后也可以使用  DomStorage适合存储比较简单的数据，存储结构化的数据，可能要借助JSON了，将要存储的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Http缓存机制">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/缓存实现/index.html">
+<meta property="og:site_name" content="一个人的旅程">
+<meta property="og:description" content="缓存实现实现方式大致分三类：HTTP协议头控制，Dom Storage AppCacheTTP协议头控制:Cache-Control Dom Storage sessionStorage对象用来存储与页面相关的数据，它在页面关闭后无法使用  localStorage对象持久存在，在页面关闭后也可以使用  DomStorage适合存储比较简单的数据，存储结构化的数据，可能要借助JSON了，将要存储的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-19T03:36:09.622Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Http缓存机制">
+<meta name="twitter:description" content="缓存实现实现方式大致分三类：HTTP协议头控制，Dom Storage AppCacheTTP协议头控制:Cache-Control Dom Storage sessionStorage对象用来存储与页面相关的数据，它在页面关闭后无法使用  localStorage对象持久存在，在页面关闭后也可以使用  DomStorage适合存储比较简单的数据，存储结构化的数据，可能要借助JSON了，将要存储的">
+  
+    <link rel="alternate" href="/atom.xml" title="一个人的旅程" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">一个人的旅程</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-缓存实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/19/缓存实现/" class="article-date">
+  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Http缓存机制
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="缓存实现"><a href="#缓存实现" class="headerlink" title="缓存实现"></a>缓存实现</h1><h2 id="实现方式大致分三类：HTTP协议头控制，Dom-Storage-AppCache"><a href="#实现方式大致分三类：HTTP协议头控制，Dom-Storage-AppCache" class="headerlink" title="实现方式大致分三类：HTTP协议头控制，Dom Storage AppCache"></a>实现方式大致分三类：HTTP协议头控制，Dom Storage AppCache</h2><h3 id="TTP协议头控制-Cache-Control"><a href="#TTP协议头控制-Cache-Control" class="headerlink" title="TTP协议头控制:Cache-Control"></a>TTP协议头控制:Cache-Control</h3><hr>
+<h3 id="Dom-Storage"><a href="#Dom-Storage" class="headerlink" title="Dom Storage"></a>Dom Storage</h3><ul>
+<li><p>sessionStorage对象用来存储与页面相关的数据，它在页面关闭后无法使用</p>
+</li>
+<li><p>localStorage对象持久存在，在页面关闭后也可以使用</p>
+</li>
+<li><p>DomStorage适合存储比较简单的数据，存储结构化的数据，可能要借助JSON了，将要存储的对象转为JSON字串。不太适合存储比较复杂或存储空间要求比较大的数据，也不适合存储静态的文件等。</p>
+</li>
+</ul>
+<hr>
+<h3 id="Application-Cache机制"><a href="#Application-Cache机制" class="headerlink" title="Application Cache机制"></a>Application Cache机制</h3><p>-Application Cache（简称AppCache)似乎是为支持Web App离线使用而开发的缓存机制。它的缓存机制类似于浏览器的缓存（Cache-Control 和 Last-Modified）机制，都是以文件为单位进行缓存，且文件有一定更新机制。但AppCache是对浏览器缓存机制的补充，不是替代。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/19/缓存实现/" data-id="cjexohzbi0006d7xfavxs6zqw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/19/算法/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/19/静态资源优化/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Http缓存机制</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/19/Http缓存机制/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/XSS攻击和csrf攻击/">XSS攻击和csrf攻击</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git和svn的区别/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/webpack/">Http缓存机制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 msChen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

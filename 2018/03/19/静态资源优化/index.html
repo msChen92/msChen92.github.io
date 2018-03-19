@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Http缓存机制 | 一个人的旅程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="静态资源优化方案配置超长时间的本地缓存 —— 节省带宽，提高性能采用内容摘要作为缓存更新依据 —— 精确的缓存控制静态资源CDN部署 —— 优化网络请求更资源发布路径实现非覆盖式发布 —— 平滑升级 先部署页面，再部署资源：在二者部署的时间间隔内，如果有用户访问页面，就会在新的页面结构中加载旧的资源，并且把这个旧版本的资源当做新版本缓存起来，其结果就是：用户访问到了一个样式错乱的页面，除非手动刷新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Http缓存机制">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/静态资源优化/index.html">
+<meta property="og:site_name" content="一个人的旅程">
+<meta property="og:description" content="静态资源优化方案配置超长时间的本地缓存 —— 节省带宽，提高性能采用内容摘要作为缓存更新依据 —— 精确的缓存控制静态资源CDN部署 —— 优化网络请求更资源发布路径实现非覆盖式发布 —— 平滑升级 先部署页面，再部署资源：在二者部署的时间间隔内，如果有用户访问页面，就会在新的页面结构中加载旧的资源，并且把这个旧版本的资源当做新版本缓存起来，其结果就是：用户访问到了一个样式错乱的页面，除非手动刷新">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-19T03:36:09.622Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Http缓存机制">
+<meta name="twitter:description" content="静态资源优化方案配置超长时间的本地缓存 —— 节省带宽，提高性能采用内容摘要作为缓存更新依据 —— 精确的缓存控制静态资源CDN部署 —— 优化网络请求更资源发布路径实现非覆盖式发布 —— 平滑升级 先部署页面，再部署资源：在二者部署的时间间隔内，如果有用户访问页面，就会在新的页面结构中加载旧的资源，并且把这个旧版本的资源当做新版本缓存起来，其结果就是：用户访问到了一个样式错乱的页面，除非手动刷新">
+  
+    <link rel="alternate" href="/atom.xml" title="一个人的旅程" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">一个人的旅程</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-静态资源优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/19/静态资源优化/" class="article-date">
+  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Http缓存机制
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="静态资源优化方案"><a href="#静态资源优化方案" class="headerlink" title="静态资源优化方案"></a>静态资源优化方案</h1><h2 id="配置超长时间的本地缓存-——-节省带宽，提高性能"><a href="#配置超长时间的本地缓存-——-节省带宽，提高性能" class="headerlink" title="配置超长时间的本地缓存 —— 节省带宽，提高性能"></a>配置超长时间的本地缓存 —— 节省带宽，提高性能</h2><h2 id="采用内容摘要作为缓存更新依据-——-精确的缓存控制"><a href="#采用内容摘要作为缓存更新依据-——-精确的缓存控制" class="headerlink" title="采用内容摘要作为缓存更新依据 —— 精确的缓存控制"></a>采用内容摘要作为缓存更新依据 —— 精确的缓存控制</h2><h2 id="静态资源CDN部署-——-优化网络请求"><a href="#静态资源CDN部署-——-优化网络请求" class="headerlink" title="静态资源CDN部署 —— 优化网络请求"></a>静态资源CDN部署 —— 优化网络请求</h2><h2 id="更资源发布路径实现非覆盖式发布-——-平滑升级"><a href="#更资源发布路径实现非覆盖式发布-——-平滑升级" class="headerlink" title="更资源发布路径实现非覆盖式发布 —— 平滑升级"></a>更资源发布路径实现非覆盖式发布 —— 平滑升级</h2><hr>
+<p>先部署页面，再部署资源：在二者部署的时间间隔内，如果有用户访问页面，就会在新的页面结构中加载旧的资源，并且把这个旧版本的资源当做新版本缓存起来，其结果就是：用户访问到了一个样式错乱的页面，除非手动刷新，否则在资源缓存过期之前，页面会一直执行错误。</p>
+<p>先部署资源，再部署页面：在部署时间间隔之内，有旧版本资源本地缓存的用户访问网站，由于请求的页面是旧版本的，资源引用没有改变，浏览器将直接使用本地缓存，这种情况下页面展现正常；但没有本地缓存或者缓存过期的用户访问网站，就会出现旧版本页面加载新版本资源的情况，导致页面执行错误，但当页面完成部署，这部分用户再次访问页面又会恢复正常了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/19/静态资源优化/" data-id="cjexohzbj0007d7xfxxmawza6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/19/缓存实现/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Http缓存机制
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/19/Http缓存机制/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/XSS攻击和csrf攻击/">XSS攻击和csrf攻击</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git和svn的区别/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/webpack/">Http缓存机制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 msChen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
