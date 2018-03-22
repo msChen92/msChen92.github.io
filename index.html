@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Http缓存机制" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-缓存实现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/19/Http缓存机制/" class="article-date">
-  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+    <a href="/2018/03/22/缓存实现/" class="article-date">
+  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
 </a>
     
   </div>
@@ -76,7 +76,54 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/19/Http缓存机制/">Http缓存机制</a>
+      <a class="article-title" href="/2018/03/22/缓存实现/">Http缓存机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="缓存实现"><a href="#缓存实现" class="headerlink" title="缓存实现"></a>缓存实现</h1><h2 id="实现方式大致分三类：HTTP协议头控制，Dom-Storage-AppCache"><a href="#实现方式大致分三类：HTTP协议头控制，Dom-Storage-AppCache" class="headerlink" title="实现方式大致分三类：HTTP协议头控制，Dom Storage AppCache"></a>实现方式大致分三类：HTTP协议头控制，Dom Storage AppCache</h2><h3 id="TTP协议头控制-Cache-Control"><a href="#TTP协议头控制-Cache-Control" class="headerlink" title="TTP协议头控制:Cache-Control"></a>TTP协议头控制:Cache-Control</h3><hr>
+<h3 id="Dom-Storage"><a href="#Dom-Storage" class="headerlink" title="Dom Storage"></a>Dom Storage</h3><ul>
+<li><p>sessionStorage对象用来存储与页面相关的数据，它在页面关闭后无法使用</p>
+</li>
+<li><p>localStorage对象持久存在，在页面关闭后也可以使用</p>
+</li>
+<li><p>DomStorage适合存储比较简单的数据，存储结构化的数据，可能要借助JSON了，将要存储的对象转为JSON字串。不太适合存储比较复杂或存储空间要求比较大的数据，也不适合存储静态的文件等。</p>
+</li>
+</ul>
+<hr>
+<h3 id="Application-Cache机制"><a href="#Application-Cache机制" class="headerlink" title="Application Cache机制"></a>Application Cache机制</h3><p>-Application Cache（简称AppCache)似乎是为支持Web App离线使用而开发的缓存机制。它的缓存机制类似于浏览器的缓存（Cache-Control 和 Last-Modified）机制，都是以文件为单位进行缓存，且文件有一定更新机制。但AppCache是对浏览器缓存机制的补充，不是替代。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/22/缓存实现/" data-id="cjf24ju6n0005dbxhl0lflxx6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Http缓存机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/22/Http缓存机制/" class="article-date">
+  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/22/Http缓存机制/">Http缓存机制</a>
     </h1>
   
 
@@ -115,70 +162,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/19/Http缓存机制/" data-id="cjexohzay0000d7xfv0z5vkd9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-XSS攻击和csrf攻击" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/19/XSS攻击和csrf攻击/" class="article-date">
-  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/19/XSS攻击和csrf攻击/">XSS攻击和csrf攻击</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="XSS攻击和csrf攻击"><a href="#XSS攻击和csrf攻击" class="headerlink" title="XSS攻击和csrf攻击"></a>XSS攻击和csrf攻击</h1><h2 id="XSS-Cross-Site-Script"><a href="#XSS-Cross-Site-Script" class="headerlink" title="XSS(Cross Site Script)"></a>XSS(Cross Site Script)</h2><ul>
-<li>跨站脚本攻击：向网页中注入恶意脚本在用户浏览网页时执行恶意脚本的攻击方式<ul>
-<li>反射弧攻击：[经过后端，不经过数据库]诱使用户点击一个嵌入恶意脚本的连接达到攻击的目标</li>
-<li>持久型攻击：[经过后端，经过数据库]将恶意脚本提交到被攻击网站的数据库中，用户浏览网页时，恶意脚本从数据库中被加载到页面执行</li>
-<li>DOM：[不经过后端] dom-xss通过url传入参数去控制触发</li>
-</ul>
-</li>
-</ul>
-<h3 id="防范XSS攻击"><a href="#防范XSS攻击" class="headerlink" title="防范XSS攻击"></a>防范XSS攻击</h3><ul>
-<li>编码，转义用户输入，把用户的输入解读为数据而不是代码</li>
-<li>校验度，对用户的输入及请求进行过滤检查，对特殊字符串进行过滤，设置输入域的匹配规则</li>
-<li>对于持久性和反射型攻击，福区段验证是必须的</li>
-<li>对于基于DOM的XSS攻击，验证输入在客户端必须执行</li>
-<li><p><a href="http://www.freebuf.com/articles/web/9977.html" target="_blank" rel="noopener">防御XSS的七条原则</a></p>
-<hr>
-</li>
-</ul>
-<h2 id="CSRF攻击-Cross-Site-Request-Forgery"><a href="#CSRF攻击-Cross-Site-Request-Forgery" class="headerlink" title="CSRF攻击(Cross Site Request Forgery)"></a>CSRF攻击(Cross Site Request Forgery)</h2><ul>
-<li>跨站请求伪造：攻击者通过跨站请求，以合法的用户身份进行非法操作</li>
-<li>主要原理是利用浏览器的Cookie或服务器的Session盗取用户身份</li>
-</ul>
-<h3 id="防范CSRF的主要手段是：识别请求者身份"><a href="#防范CSRF的主要手段是：识别请求者身份" class="headerlink" title="防范CSRF的主要手段是：识别请求者身份"></a>防范CSRF的主要手段是：识别请求者身份</h3><ul>
-<li>1.在表单中添加令牌（token)</li>
-<li>2.验证码[用户体验糟糕–在短时间内多次提交一个表单而未获得成功后可以要求提供验证码，比较好的用户体验]</li>
-<li>3.检查请求头中的Referer(应用：防图片盗连接)</li>
-</ul>
-<hr>
-<h2 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/19/XSS攻击和csrf攻击/" data-id="cjexohzb50001d7xfijom6p27" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/Http缓存机制/" data-id="cjf24ju660000dbxh8vbc6ux1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -190,8 +174,8 @@
   
     <article id="post-git和svn的区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/19/git和svn的区别/" class="article-date">
-  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+    <a href="/2018/03/22/git和svn的区别/" class="article-date">
+  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
 </a>
     
   </div>
@@ -202,7 +186,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/19/git和svn的区别/">Http缓存机制</a>
+      <a class="article-title" href="/2018/03/22/git和svn的区别/">Http缓存机制</a>
     </h1>
   
 
@@ -228,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/19/git和svn的区别/" data-id="cjexohzbb0002d7xf7s6ob2cb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/git和svn的区别/" data-id="cjf24ju6h0002dbxheuplyk6b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -240,8 +224,8 @@
   
     <article id="post-http协商缓存VS强缓存" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/19/http协商缓存VS强缓存/" class="article-date">
-  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+    <a href="/2018/03/22/http协商缓存VS强缓存/" class="article-date">
+  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
 </a>
     
   </div>
@@ -252,7 +236,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/19/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+      <a class="article-title" href="/2018/03/22/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
     </h1>
   
 
@@ -310,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/19/http协商缓存VS强缓存/" data-id="cjexohzbd0003d7xf5wsrzc5o" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/http协商缓存VS强缓存/" data-id="cjf24ju6j0003dbxhzupg8qav" class="article-share-link">Share</a>
       
       
     </footer>
@@ -322,8 +306,8 @@
   
     <article id="post-webpack" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/19/webpack/" class="article-date">
-  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+    <a href="/2018/03/22/webpack/" class="article-date">
+  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
 </a>
     
   </div>
@@ -334,7 +318,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/19/webpack/">Http缓存机制</a>
+      <a class="article-title" href="/2018/03/22/webpack/">Http缓存机制</a>
     </h1>
   
 
@@ -421,7 +405,101 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/19/webpack/" data-id="cjexohzbf0004d7xfn47js0er" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/webpack/" data-id="cjf24ju6l0004dbxh062aits6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-XSS攻击和csrf攻击" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/22/XSS攻击和csrf攻击/" class="article-date">
+  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/22/XSS攻击和csrf攻击/">XSS攻击和csrf攻击</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="XSS攻击和csrf攻击"><a href="#XSS攻击和csrf攻击" class="headerlink" title="XSS攻击和csrf攻击"></a>XSS攻击和csrf攻击</h1><h2 id="XSS-Cross-Site-Script"><a href="#XSS-Cross-Site-Script" class="headerlink" title="XSS(Cross Site Script)"></a>XSS(Cross Site Script)</h2><ul>
+<li>跨站脚本攻击：向网页中注入恶意脚本在用户浏览网页时执行恶意脚本的攻击方式<ul>
+<li>反射弧攻击：[经过后端，不经过数据库]诱使用户点击一个嵌入恶意脚本的连接达到攻击的目标</li>
+<li>持久型攻击：[经过后端，经过数据库]将恶意脚本提交到被攻击网站的数据库中，用户浏览网页时，恶意脚本从数据库中被加载到页面执行</li>
+<li>DOM：[不经过后端] dom-xss通过url传入参数去控制触发</li>
+</ul>
+</li>
+</ul>
+<h3 id="防范XSS攻击"><a href="#防范XSS攻击" class="headerlink" title="防范XSS攻击"></a>防范XSS攻击</h3><ul>
+<li>编码，转义用户输入，把用户的输入解读为数据而不是代码<ul>
+<li>对用户输入的数据进行HTML Entity编码 &lt; 的编码是 &lt;</li>
+</ul>
+</li>
+<li><p>过滤：校验度，对用户的输入及请求进行过滤检查，对特殊字符串进行过滤，设置输入域的匹配规则</p>
+<ul>
+<li>移除用户上传的DOM属性，如onerror等</li>
+<li>移除用户上传的style节点，script节点 ，iframe节点</li>
+</ul>
+</li>
+<li><p>校正 ：避免直接对HTML Entity编码,使用DOM Parse转换，校正不匹配对的DOM标签</p>
+</li>
+<li>对于持久性和反射型攻击，福区段验证是必须的</li>
+<li>对于基于DOM的XSS攻击，验证输入在客户端必须执行</li>
+<li><p><a href="http://www.freebuf.com/articles/web/9977.html" target="_blank" rel="noopener">防御XSS的七条原则</a></p>
+<hr>
+</li>
+</ul>
+<h2 id="CSRF攻击-Cross-Site-Request-Forgery"><a href="#CSRF攻击-Cross-Site-Request-Forgery" class="headerlink" title="CSRF攻击(Cross Site Request Forgery)"></a>CSRF攻击(Cross Site Request Forgery)</h2><ul>
+<li>跨站请求伪造：攻击者通过跨站请求，以合法的用户身份进行非法操作</li>
+<li>主要原理是利用浏览器的Cookie或服务器的Session盗取用户身份</li>
+</ul>
+<h3 id="防范CSRF的主要手段是：识别请求者身份"><a href="#防范CSRF的主要手段是：识别请求者身份" class="headerlink" title="防范CSRF的主要手段是：识别请求者身份"></a>防范CSRF的主要手段是：识别请求者身份</h3><ul>
+<li>1.在表单中添加令牌（token)</li>
+<li>2.验证码[用户体验糟糕–在短时间内多次提交一个表单而未获得成功后可以要求提供验证码，比较好的用户体验]</li>
+<li>3.检查请求头中的Referer(应用：防图片盗连接)</li>
+</ul>
+<hr>
+<h2 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h2><ul>
+<li>SQL注入是一种将SQL代码添加到输入参数中，传递到SQL服务器解析并执行的一种攻击手法</li>
+<li><p>SQL注入的产生</p>
+<ul>
+<li>web开发人员无法保证所有的输入都已经过滤</li>
+<li>攻击者利用发送给SQL服务器的输入数据构造可执行的SQL代码</li>
+<li>数据库未做相应的安全配置</li>
+</ul>
+</li>
+<li><p>SQL的数字注入：使得sql查询条件为真</p>
+</li>
+<li><p>SQL字符串注入：sql语句的(#)或是(–)后面都会被当成注释，所以只要用单引号或双引号，闭合前面的sql语句即可</p>
+</li>
+<li><p>如何预防SQL注入：</p>
+<ul>
+<li>严格检查输入变量的类型和格式：检查id是否为空或是不合法，正则校验 </li>
+<li>过滤和转义特殊字符：addslahes(username)或mysqli_real_escape_string()对单引号，双引号进行转义</li>
+<li>利用mysql的预编译机制</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/22/XSS攻击和csrf攻击/" data-id="cjf24ju6e0001dbxhnakzsu0z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -433,8 +511,8 @@
   
     <article id="post-算法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/19/算法/" class="article-date">
-  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+    <a href="/2018/03/22/算法/" class="article-date">
+  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
 </a>
     
   </div>
@@ -445,7 +523,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/19/算法/">算法</a>
+      <a class="article-title" href="/2018/03/22/算法/">算法</a>
     </h1>
   
 
@@ -471,54 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/19/算法/" data-id="cjexohzbg0005d7xf62tkt474" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-缓存实现" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/19/缓存实现/" class="article-date">
-  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/19/缓存实现/">Http缓存机制</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="缓存实现"><a href="#缓存实现" class="headerlink" title="缓存实现"></a>缓存实现</h1><h2 id="实现方式大致分三类：HTTP协议头控制，Dom-Storage-AppCache"><a href="#实现方式大致分三类：HTTP协议头控制，Dom-Storage-AppCache" class="headerlink" title="实现方式大致分三类：HTTP协议头控制，Dom Storage AppCache"></a>实现方式大致分三类：HTTP协议头控制，Dom Storage AppCache</h2><h3 id="TTP协议头控制-Cache-Control"><a href="#TTP协议头控制-Cache-Control" class="headerlink" title="TTP协议头控制:Cache-Control"></a>TTP协议头控制:Cache-Control</h3><hr>
-<h3 id="Dom-Storage"><a href="#Dom-Storage" class="headerlink" title="Dom Storage"></a>Dom Storage</h3><ul>
-<li><p>sessionStorage对象用来存储与页面相关的数据，它在页面关闭后无法使用</p>
-</li>
-<li><p>localStorage对象持久存在，在页面关闭后也可以使用</p>
-</li>
-<li><p>DomStorage适合存储比较简单的数据，存储结构化的数据，可能要借助JSON了，将要存储的对象转为JSON字串。不太适合存储比较复杂或存储空间要求比较大的数据，也不适合存储静态的文件等。</p>
-</li>
-</ul>
-<hr>
-<h3 id="Application-Cache机制"><a href="#Application-Cache机制" class="headerlink" title="Application Cache机制"></a>Application Cache机制</h3><p>-Application Cache（简称AppCache)似乎是为支持Web App离线使用而开发的缓存机制。它的缓存机制类似于浏览器的缓存（Cache-Control 和 Last-Modified）机制，都是以文件为单位进行缓存，且文件有一定更新机制。但AppCache是对浏览器缓存机制的补充，不是替代。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/19/缓存实现/" data-id="cjexohzbi0006d7xfavxs6zqw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/算法/" data-id="cjf24ju6p0006dbxhoqkr2des" class="article-share-link">Share</a>
       
       
     </footer>
@@ -530,8 +561,8 @@
   
     <article id="post-静态资源优化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/19/静态资源优化/" class="article-date">
-  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+    <a href="/2018/03/22/静态资源优化/" class="article-date">
+  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
 </a>
     
   </div>
@@ -542,7 +573,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/19/静态资源优化/">Http缓存机制</a>
+      <a class="article-title" href="/2018/03/22/静态资源优化/">Http缓存机制</a>
     </h1>
   
 
@@ -557,7 +588,120 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/19/静态资源优化/" data-id="cjexohzbj0007d7xfxxmawza6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/静态资源优化/" data-id="cjf24ju6q0007dbxhcyle4v8l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-面试篇-css" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/22/面试篇-css/" class="article-date">
+  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/22/面试篇-css/">css</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="css哪些样式可以被继承"><a href="#css哪些样式可以被继承" class="headerlink" title="css哪些样式可以被继承"></a>css哪些样式可以被继承</h1><ul>
+<li>字体系列属性：font  font-family font-weight font-size  font-style</li>
+<li>文本系列属性：text-indent text-align line-height word-spacing text-tranform color</li>
+<li>元素可见性：visibility</li>
+<li>光标水性：cursor</li>
+</ul>
+<h1 id="rem的原理"><a href="#rem的原理" class="headerlink" title="rem的原理"></a>rem的原理</h1><h2 id="首先理解em和px"><a href="#首先理解em和px" class="headerlink" title="首先理解em和px"></a>首先理解em和px</h2><ul>
+<li>px和em都是长度单位，区别是，px的值是固定的，指定是多少就是多少，计算比较容易。em的值不是固定的，并且em会继承父级元素的字体大小。浏览器的默认字体高都是16px。所以未经调整的浏览器都符合: 1em=16px。那么12px=0.75em, 10px=0.625em。</li>
+<li>em是为字体而生的</li>
+<li>rem布局的本质是等比缩放，一般是基于宽度<ul>
+<li>rem是相对单位：相对的是html根元素，em是相对于父元素</li>
+</ul>
+</li>
+<li>比rem更好的方案：vw(视口的宽度的1/100) 和vh(视口高度的1/100)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*rem方案*/</span><br><span class="line">html&#123;font-size:width/100&#125;//js获取宽度</span><br><span class="line">p&#123;width:15.625rem&#125;</span><br><span class="line">/*vw方案*/</span><br><span class="line">p&#123;width:15.625vw&#125;//不需要js，但是兼容性差</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/22/面试篇-css/" data-id="cjf24ju6s0008dbxhh1fhcpvb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-面试篇-js" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/22/面试篇-js/" class="article-date">
+  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/22/面试篇-js/">js</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="js对象深浅克隆"><a href="#js对象深浅克隆" class="headerlink" title="js对象深浅克隆"></a>js对象深浅克隆</h1><ul>
+<li>浅复制：只会将对象的各个属性进行依次复制，并不会进行递归复制，而js存储对象都是存地址的，所以浅复制会导致obj.c和shallowCopy.c 指向同一块内存地址；会导致引用。</li>
+<li>对象的深复制：它不仅将原对象的各个属性逐个复制出去，而且将原对象各个属性所包含的对象也依次采用深复制的方法递归复制到新对象上。这就不会存在上面obj和shallowCopy的c属性指向同一个对象的问题。<br>最核心的思想还是采用递归的方式，不断进行，直到基本数据类型后，再复制</li>
+</ul>
+<h1 id="js中的this"><a href="#js中的this" class="headerlink" title="js中的this"></a>js中的this</h1><p>##js中的this指向</p>
+<ul>
+<li>全局作用域或者普遍函数中this指向全局对象window</li>
+<li>方调用中谁调用this指向谁</li>
+<li>在构造函数或这个构造函数原型对象中this指向构造函数的实例(不适用new是指向window的)</li>
+</ul>
+<h2 id="call-apply-bind"><a href="#call-apply-bind" class="headerlink" title="call / apply / bind"></a>call / apply / bind</h2><ul>
+<li><p>call:第一个参数如果是null的话，this就会指向window</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;</span><br><span class="line">    user:&quot;追梦子&quot;,</span><br><span class="line">    fn:function(e,ee)&#123;</span><br><span class="line">        console.log(this.user); //追梦子</span><br><span class="line">        console.log(e+ee); //3</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b = a.fn;</span><br><span class="line">b.call(a,1,2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>apply的第二个参数必须是数组,第一个参数如果是null的话，this就会指向window</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;</span><br><span class="line">    user:&quot;追梦子&quot;,</span><br><span class="line">    fn:function(e,ee)&#123;</span><br><span class="line">        console.log(this.user); //追梦子</span><br><span class="line">        console.log(e+ee); //11</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b = a.fn;</span><br><span class="line">b.apply(a,[10,1]);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>bind:bind方法返回的是一个修改过后的函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;</span><br><span class="line">    user:&quot;追梦子&quot;,</span><br><span class="line">    fn:function(e,d,f)&#123;</span><br><span class="line">        console.log(this.user); //追梦子</span><br><span class="line">        console.log(e,d,f); //10 1 2</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b = a.fn;</span><br><span class="line">var c = b.bind(a,10);</span><br><span class="line">c(1,2);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>区别：call和apply都是改变上下文中的this并立即执行这个函数，bind方法可以让对应的函数想什么时候调就什么时候调用，并且可以将参数在执行的时候添加，这是它们的区别</p>
+</li>
+</ul>
+<h1 id="cookie-localStroage-sessionStroage-区别"><a href="#cookie-localStroage-sessionStroage-区别" class="headerlink" title="cookie,localStroage,sessionStroage 区别"></a>cookie,localStroage,sessionStroage 区别</h1><h1 id="跨域的方法及原理"><a href="#跨域的方法及原理" class="headerlink" title="跨域的方法及原理"></a>跨域的方法及原理</h1><p>#js中的事件委托</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/22/面试篇-js/" data-id="cjf24ju6t0009dbxhgby63qm9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -568,6 +712,10 @@
 
   
 
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">
@@ -597,23 +745,23 @@
       <ul>
         
           <li>
-            <a href="/2018/03/19/Http缓存机制/">Http缓存机制</a>
+            <a href="/2018/03/22/缓存实现/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/19/XSS攻击和csrf攻击/">XSS攻击和csrf攻击</a>
+            <a href="/2018/03/22/Http缓存机制/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/19/git和svn的区别/">Http缓存机制</a>
+            <a href="/2018/03/22/git和svn的区别/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/19/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+            <a href="/2018/03/22/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
           </li>
         
           <li>
-            <a href="/2018/03/19/webpack/">Http缓存机制</a>
+            <a href="/2018/03/22/webpack/">Http缓存机制</a>
           </li>
         
       </ul>

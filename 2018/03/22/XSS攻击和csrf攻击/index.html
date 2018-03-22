@@ -8,11 +8,11 @@
   <meta name="description" content="XSS攻击和csrf攻击XSS(Cross Site Script) 跨站脚本攻击：向网页中注入恶意脚本在用户浏览网页时执行恶意脚本的攻击方式 反射弧攻击：[经过后端，不经过数据库]诱使用户点击一个嵌入恶意脚本的连接达到攻击的目标 持久型攻击：[经过后端，经过数据库]将恶意脚本提交到被攻击网站的数据库中，用户浏览网页时，恶意脚本从数据库中被加载到页面执行 DOM：[不经过后端] dom-xss通过">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XSS攻击和csrf攻击">
-<meta property="og:url" content="http://yoursite.com/2018/03/19/XSS攻击和csrf攻击/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/03/22/XSS攻击和csrf攻击/index.html">
 <meta property="og:site_name" content="一个人的旅程">
 <meta property="og:description" content="XSS攻击和csrf攻击XSS(Cross Site Script) 跨站脚本攻击：向网页中注入恶意脚本在用户浏览网页时执行恶意脚本的攻击方式 反射弧攻击：[经过后端，不经过数据库]诱使用户点击一个嵌入恶意脚本的连接达到攻击的目标 持久型攻击：[经过后端，经过数据库]将恶意脚本提交到被攻击网站的数据库中，用户浏览网页时，恶意脚本从数据库中被加载到页面执行 DOM：[不经过后端] dom-xss通过">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-19T03:36:09.622Z">
+<meta property="og:updated_time" content="2018-03-22T06:16:28.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS攻击和csrf攻击">
 <meta name="twitter:description" content="XSS攻击和csrf攻击XSS(Cross Site Script) 跨站脚本攻击：向网页中注入恶意脚本在用户浏览网页时执行恶意脚本的攻击方式 反射弧攻击：[经过后端，不经过数据库]诱使用户点击一个嵌入恶意脚本的连接达到攻击的目标 持久型攻击：[经过后端，经过数据库]将恶意脚本提交到被攻击网站的数据库中，用户浏览网页时，恶意脚本从数据库中被加载到页面执行 DOM：[不经过后端] dom-xss通过">
@@ -66,8 +66,8 @@
       <div class="outer">
         <section id="main"><article id="post-XSS攻击和csrf攻击" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/19/XSS攻击和csrf攻击/" class="article-date">
-  <time datetime="2018-03-19T03:36:09.622Z" itemprop="datePublished">2018-03-19</time>
+    <a href="/2018/03/22/XSS攻击和csrf攻击/" class="article-date">
+  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
 </a>
     
   </div>
@@ -95,8 +95,18 @@
 </li>
 </ul>
 <h3 id="防范XSS攻击"><a href="#防范XSS攻击" class="headerlink" title="防范XSS攻击"></a>防范XSS攻击</h3><ul>
-<li>编码，转义用户输入，把用户的输入解读为数据而不是代码</li>
-<li>校验度，对用户的输入及请求进行过滤检查，对特殊字符串进行过滤，设置输入域的匹配规则</li>
+<li>编码，转义用户输入，把用户的输入解读为数据而不是代码<ul>
+<li>对用户输入的数据进行HTML Entity编码 &lt; 的编码是 &lt;</li>
+</ul>
+</li>
+<li><p>过滤：校验度，对用户的输入及请求进行过滤检查，对特殊字符串进行过滤，设置输入域的匹配规则</p>
+<ul>
+<li>移除用户上传的DOM属性，如onerror等</li>
+<li>移除用户上传的style节点，script节点 ，iframe节点</li>
+</ul>
+</li>
+<li><p>校正 ：避免直接对HTML Entity编码,使用DOM Parse转换，校正不匹配对的DOM标签</p>
+</li>
 <li>对于持久性和反射型攻击，福区段验证是必须的</li>
 <li>对于基于DOM的XSS攻击，验证输入在客户端必须执行</li>
 <li><p><a href="http://www.freebuf.com/articles/web/9977.html" target="_blank" rel="noopener">防御XSS的七条原则</a></p>
@@ -113,11 +123,32 @@
 <li>3.检查请求头中的Referer(应用：防图片盗连接)</li>
 </ul>
 <hr>
-<h2 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h2>
+<h2 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h2><ul>
+<li>SQL注入是一种将SQL代码添加到输入参数中，传递到SQL服务器解析并执行的一种攻击手法</li>
+<li><p>SQL注入的产生</p>
+<ul>
+<li>web开发人员无法保证所有的输入都已经过滤</li>
+<li>攻击者利用发送给SQL服务器的输入数据构造可执行的SQL代码</li>
+<li>数据库未做相应的安全配置</li>
+</ul>
+</li>
+<li><p>SQL的数字注入：使得sql查询条件为真</p>
+</li>
+<li><p>SQL字符串注入：sql语句的(#)或是(–)后面都会被当成注释，所以只要用单引号或双引号，闭合前面的sql语句即可</p>
+</li>
+<li><p>如何预防SQL注入：</p>
+<ul>
+<li>严格检查输入变量的类型和格式：检查id是否为空或是不合法，正则校验 </li>
+<li>过滤和转义特殊字符：addslahes(username)或mysqli_real_escape_string()对单引号，双引号进行转义</li>
+<li>利用mysql的预编译机制</li>
+</ul>
+</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/19/XSS攻击和csrf攻击/" data-id="cjexohzb50001d7xfijom6p27" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/XSS攻击和csrf攻击/" data-id="cjf24ju6e0001dbxhnakzsu0z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -126,7 +157,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/03/19/Http缓存机制/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/22/webpack/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -136,9 +167,9 @@
     </a>
   
   
-    <a href="/2018/03/19/git和svn的区别/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/03/22/算法/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Http缓存机制</div>
+      <div class="article-nav-title">算法</div>
     </a>
   
 </nav>
@@ -175,23 +206,23 @@
       <ul>
         
           <li>
-            <a href="/2018/03/19/Http缓存机制/">Http缓存机制</a>
+            <a href="/2018/03/22/缓存实现/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/19/XSS攻击和csrf攻击/">XSS攻击和csrf攻击</a>
+            <a href="/2018/03/22/Http缓存机制/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/19/git和svn的区别/">Http缓存机制</a>
+            <a href="/2018/03/22/git和svn的区别/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/19/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+            <a href="/2018/03/22/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
           </li>
         
           <li>
-            <a href="/2018/03/19/webpack/">Http缓存机制</a>
+            <a href="/2018/03/22/webpack/">Http缓存机制</a>
           </li>
         
       </ul>

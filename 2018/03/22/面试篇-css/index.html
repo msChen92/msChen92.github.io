@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>css | 一个人的旅程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="css哪些样式可以被继承 字体系列属性：font  font-family font-weight font-size  font-style 文本系列属性：text-indent text-align line-height word-spacing text-tranform color 元素可见性：visibility 光标水性：cursor  rem的原理首先理解em和px px和em都是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css">
+<meta property="og:url" content="http://yoursite.com/2018/03/22/面试篇-css/index.html">
+<meta property="og:site_name" content="一个人的旅程">
+<meta property="og:description" content="css哪些样式可以被继承 字体系列属性：font  font-family font-weight font-size  font-style 文本系列属性：text-indent text-align line-height word-spacing text-tranform color 元素可见性：visibility 光标水性：cursor  rem的原理首先理解em和px px和em都是">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-22T06:16:28.067Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css">
+<meta name="twitter:description" content="css哪些样式可以被继承 字体系列属性：font  font-family font-weight font-size  font-style 文本系列属性：text-indent text-align line-height word-spacing text-tranform color 元素可见性：visibility 光标水性：cursor  rem的原理首先理解em和px px和em都是">
+  
+    <link rel="alternate" href="/atom.xml" title="一个人的旅程" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">一个人的旅程</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-面试篇-css" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/22/面试篇-css/" class="article-date">
+  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      css
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="css哪些样式可以被继承"><a href="#css哪些样式可以被继承" class="headerlink" title="css哪些样式可以被继承"></a>css哪些样式可以被继承</h1><ul>
+<li>字体系列属性：font  font-family font-weight font-size  font-style</li>
+<li>文本系列属性：text-indent text-align line-height word-spacing text-tranform color</li>
+<li>元素可见性：visibility</li>
+<li>光标水性：cursor</li>
+</ul>
+<h1 id="rem的原理"><a href="#rem的原理" class="headerlink" title="rem的原理"></a>rem的原理</h1><h2 id="首先理解em和px"><a href="#首先理解em和px" class="headerlink" title="首先理解em和px"></a>首先理解em和px</h2><ul>
+<li>px和em都是长度单位，区别是，px的值是固定的，指定是多少就是多少，计算比较容易。em的值不是固定的，并且em会继承父级元素的字体大小。浏览器的默认字体高都是16px。所以未经调整的浏览器都符合: 1em=16px。那么12px=0.75em, 10px=0.625em。</li>
+<li>em是为字体而生的</li>
+<li>rem布局的本质是等比缩放，一般是基于宽度<ul>
+<li>rem是相对单位：相对的是html根元素，em是相对于父元素</li>
+</ul>
+</li>
+<li>比rem更好的方案：vw(视口的宽度的1/100) 和vh(视口高度的1/100)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*rem方案*/</span><br><span class="line">html&#123;font-size:width/100&#125;//js获取宽度</span><br><span class="line">p&#123;width:15.625rem&#125;</span><br><span class="line">/*vw方案*/</span><br><span class="line">p&#123;width:15.625vw&#125;//不需要js，但是兼容性差</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/22/面试篇-css/" data-id="cjf24ju6s0008dbxhh1fhcpvb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/22/静态资源优化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Http缓存机制
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/22/面试篇-js/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">js</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/22/缓存实现/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/22/Http缓存机制/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/22/git和svn的区别/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/22/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/22/webpack/">Http缓存机制</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 msChen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
