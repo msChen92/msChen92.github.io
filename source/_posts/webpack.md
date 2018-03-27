@@ -28,11 +28,12 @@ title: webpack
 - 剥离css文件，单独打包
  	+ 安装webpack插件extract-text-webpack-plugin。 npm install extract-text-webpack-plugin --save-dev。 
  	+ 这里使用了contenthash，webpack会根据内容去生成hash值。
-
- ```plugins:[
-	 new ExtractTextPlugin('static/css/styles.[contenthash].css'),
-	]
 ```
+plugins:[
+   new ExtractTextPlugin('static/css/styles.[contenthash].css'),
+  ]
+```
+
 
 - 使用UglifyJSPlugin压缩
 - 提取公共依赖
@@ -72,25 +73,30 @@ webpack会将加载的资源作为参数传入loader方法，交于loader处理�
 
 - [如何编写一个loader](https://doc.webpack-china.org/contribute/writing-a-loader)
  + 在我这个需求中，就是将我加载的html，套在我设定的layout中，再将这个处理完的html返回。大致的代码就是这样：
- ```// {string} source: 加载的html的字符串值
+```
+ // {string} source: 加载的html的字符串值
 module.exports = function (source) {
   return getLayoutHtml().replace('{{__content__}}', source)
 }
- ```
+```
  + 第一步，只要实现一个getLayoutHtml方法，能得到设定的layout.html文件就好。仔细想想，layout文件应该是通过配置声明的，然后在loader里去根据配置，调用node的api去加载文件就好
- ```module.exports = function (source) {
+```
+module.exports = function (source) {
   const options = loaderUtils.getOptions(this)
   const layoutHtml = fs.readFileSync(options.layout, 'utf-8')
   return layoutHtml.replace('{{__content__}}', source)
-}```
+}
+```
  + webpack的config增加如下loader配置：
- ```{
+```
+{
   test: /\.(html)$/,
   loader: 'html-layout-loader',
   include: htmlPath, // the htmls you want inject to layout
   options: {
     layout: layoutHtmlPath // the path of default layout html
   }
-}```
+}
+```
  + [more](https://github.com/wuomzfx/html-layout-loader)
 
