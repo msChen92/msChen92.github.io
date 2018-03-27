@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="一个人的旅程">
 <meta property="og:description" content="webpackwebpack的优点 虽然webpack的工作模式有点“怪异”，但它的配置功能和扩展能力非常出众，而且相比fis，webpack更专注于构建本身，开发者有很大的空间去改造和扩展；  与前端的新技术高度融合，比如Vue、React、Angular（这些框架也是组件化的典范，与webpack的理念有共通点）等，并且与-之对应的loader或plugin是官方或者框架作者推出的，并非“来路">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-27T06:40:39.366Z">
+<meta property="og:updated_time" content="2018-03-27T07:06:03.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack">
 <meta name="twitter:description" content="webpackwebpack的优点 虽然webpack的工作模式有点“怪异”，但它的配置功能和扩展能力非常出众，而且相比fis，webpack更专注于构建本身，开发者有很大的空间去改造和扩展；  与前端的新技术高度融合，比如Vue、React、Angular（这些框架也是组件化的典范，与webpack的理念有共通点）等，并且与-之对应的loader或plugin是官方或者框架作者推出的，并非“来路">
@@ -67,7 +67,7 @@
         <section id="main"><article id="post-webpack" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/27/webpack/" class="article-date">
-  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
+  <time datetime="2018-03-27T07:06:03.060Z" itemprop="datePublished">2018-03-27</time>
 </a>
     
   </div>
@@ -105,9 +105,9 @@
 <li><p>剥离css文件，单独打包</p>
 <ul>
 <li>安装webpack插件extract-text-webpack-plugin。 npm install extract-text-webpack-plugin –save-dev。 </li>
-<li>这里使用了contenthash，webpack会根据内容去生成hash值。</li>
+<li>这里使用了contenthash，webpack会根据内容去生成hash值。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins:[</span><br><span class="line">   new ExtractTextPlugin(&apos;static/css/styles.[contenthash].css&apos;),</span><br><span class="line">  ]</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> new ExtractTextPlugin(&apos;static/css/styles.[contenthash].css&apos;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用UglifyJSPlugin压缩</p>
 </li>
@@ -148,13 +148,13 @@
 <li><p><a href="https://doc.webpack-china.org/contribute/writing-a-loader" target="_blank" rel="noopener">如何编写一个loader</a></p>
 <ul>
 <li><p>在我这个需求中，就是将我加载的html，套在我设定的layout中，再将这个处理完的html返回。大致的代码就是这样：</p>
-<figure class="highlight plain"><figcaption><span>&#123;string&#125; source: 加载的html的字符串值</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module.exports = function (source) &#123;</span><br><span class="line">  return getLayoutHtml().replace(&apos;&#123;&#123;__content__&#125;&#125;&apos;, source)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> // &#123;string&#125; source: 加载的html的字符串值</span><br><span class="line">module.exports = function (source) &#123;</span><br><span class="line">  return getLayoutHtml().replace(&apos;&#123;&#123;__content__&#125;&#125;&apos;, source)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>第一步，只要实现一个getLayoutHtml方法，能得到设定的layout.html文件就好。仔细想想，layout文件应该是通过配置声明的，然后在loader里去根据配置，调用node的api去加载文件就好</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  const options = loaderUtils.getOptions(this)</span><br><span class="line">  const layoutHtml = fs.readFileSync(options.layout, &apos;utf-8&apos;)</span><br><span class="line">  return layoutHtml.replace(&apos;&#123;&#123;__content__&#125;&#125;&apos;, source)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = function (source) &#123;</span><br><span class="line">  const options = loaderUtils.getOptions(this)</span><br><span class="line">  const layoutHtml = fs.readFileSync(options.layout, &apos;utf-8&apos;)</span><br><span class="line">  return layoutHtml.replace(&apos;&#123;&#123;__content__&#125;&#125;&apos;, source)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>webpack的config增加如下loader配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  test: /\.(html)$/,</span><br><span class="line">  loader: &apos;html-layout-loader&apos;,</span><br><span class="line">  include: htmlPath, // the htmls you want inject to layout</span><br><span class="line">  options: &#123;</span><br><span class="line">    layout: layoutHtmlPath // the path of default layout html</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  test: /\.(html)$/,</span><br><span class="line">  loader: &apos;html-layout-loader&apos;,</span><br><span class="line">  include: htmlPath, // the htmls you want inject to layout</span><br><span class="line">  options: &#123;</span><br><span class="line">    layout: layoutHtmlPath // the path of default layout html</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><a href="https://github.com/wuomzfx/html-layout-loader" target="_blank" rel="noopener">more</a></p>
 </li>
@@ -165,7 +165,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/27/webpack/" data-id="cjf9am9e40006ddxry5y5lsgg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/27/webpack/" data-id="cjf9bj58e0006a7xcvnwru5g4" class="article-share-link">Share</a>
       
       
     </footer>

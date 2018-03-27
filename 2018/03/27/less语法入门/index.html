@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="一个人的旅程">
 <meta property="og:description" content="less语法入门变量1234567@nice-blue: #5B83AD;@light-blue: @nice-blue + #111;#header &amp;#123; color: @light-blue; &amp;#125;&amp;lt;!-- 解析后 --&amp;gt;#header &amp;#123; color: #6c94be; &amp;#125; 混合 定义一些通用的属性集为一个class，然后在另一个class中去">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-27T06:40:39.366Z">
+<meta property="og:updated_time" content="2018-03-27T07:06:03.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="less语法入门">
 <meta name="twitter:description" content="less语法入门变量1234567@nice-blue: #5B83AD;@light-blue: @nice-blue + #111;#header &amp;#123; color: @light-blue; &amp;#125;&amp;lt;!-- 解析后 --&amp;gt;#header &amp;#123; color: #6c94be; &amp;#125; 混合 定义一些通用的属性集为一个class，然后在另一个class中去">
@@ -67,7 +67,7 @@
         <section id="main"><article id="post-less语法入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/27/less语法入门/" class="article-date">
-  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
+  <time datetime="2018-03-27T07:06:03.060Z" itemprop="datePublished">2018-03-27</time>
 </a>
     
   </div>
@@ -105,11 +105,99 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) &#123;</span><br><span class="line">  box-shadow: @arguments;</span><br><span class="line">  -moz-box-shadow: @arguments;</span><br><span class="line">  -webkit-box-shadow: @arguments;</span><br><span class="line">&#125;</span><br><span class="line">.box-shadow(2px, 5px);</span><br><span class="line">&lt;!-- 解析结果 --&gt;</span><br><span class="line">box-shadow: 2px 5px 1px #000;</span><br><span class="line">  -moz-box-shadow: 2px 5px 1px #000;</span><br><span class="line">  -webkit-box-shadow: 2px 5px 1px #000;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h3>
+<h3 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h3><ul>
+<li><p>根据传入的参数来改变混合的默认呈现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//让.mixin根据不同的@switch值而表现各异</span><br><span class="line">.mixin (dark, @color) &#123;</span><br><span class="line">  color: darken(@color, 10%);</span><br><span class="line">&#125;</span><br><span class="line">.mixin (light, @color) &#123;</span><br><span class="line">  color: lighten(@color, 10%);</span><br><span class="line">&#125;</span><br><span class="line">.mixin (@_, @color) &#123;</span><br><span class="line">  display: block;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//运行</span><br><span class="line">@switch: light;</span><br><span class="line"></span><br><span class="line">.class &#123;</span><br><span class="line">  .mixin(@switch, #888);</span><br><span class="line">&#125;</span><br><span class="line">&lt;!-- 解析结果 --&gt;</span><br><span class="line">.class &#123;</span><br><span class="line">  color: #a2a2a2;</span><br><span class="line">  display: block;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">mixin就会得到传入颜色的浅色。如果@switch设为dark，就会得到深色。</span><br><span class="line"></span><br><span class="line">具体实现如下：</span><br><span class="line">第一个混合定义并未被匹配，因为它只接受dark做为首参</span><br><span class="line">第二个混合定义被成功匹配，因为它只接受light</span><br><span class="line">第三个混合定义被成功匹配，因为它接受任意值</span><br><span class="line"></span><br><span class="line">只有被匹配的混合才会被使用。变量可以匹配任意的传入值，而变量以外的固定值就仅仅匹配与其相等的传入值。</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以匹配多个参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.mixin (@a) &#123;</span><br><span class="line">  color: @a;</span><br><span class="line">&#125;</span><br><span class="line">.mixin (@a, @b) &#123;</span><br><span class="line">  color: fade(@a, @b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###导引表达式</p>
+<ul>
+<li><p>根据表达式进行匹配，而非根据值和参数匹配</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//when关键字用以定义一个导引序列(此例只有一个导引)</span><br><span class="line">.mixin (@a) when (lightness(@a) &gt;= 50%) &#123;</span><br><span class="line">  background-color: black;</span><br><span class="line">&#125;</span><br><span class="line">.mixin (@a) when (lightness(@a) &lt; 50%) &#123;</span><br><span class="line">  background-color: white;</span><br><span class="line">&#125;</span><br><span class="line">.mixin (@a) &#123;</span><br><span class="line">  color: @a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//运行</span><br><span class="line">.class1 &#123; .mixin(#ddd) &#125;</span><br><span class="line">.class2 &#123; .mixin(#555) &#125;</span><br><span class="line">&lt;!-- 解析结果 --&gt;</span><br><span class="line">.class1 &#123;</span><br><span class="line">  background-color: black;</span><br><span class="line">  color: #ddd;</span><br><span class="line">&#125;</span><br><span class="line">.class2 &#123;</span><br><span class="line">  background-color: white;</span><br><span class="line">  color: #555;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>导引中可用的全部比较运算有： &gt; &gt;= = =&lt; &lt;。此外，关键字true只表示布尔真值，除去关键字true以外的值都被视示布尔假</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.truth (@a) when (@a) &#123; ... &#125;</span><br><span class="line">.truth (@a) when (@a = true) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>导引序列使用逗号‘,’—分割，当且仅当所有条件都符合时，才会被视为匹配成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.mixin (@a) when (@a &gt; 10), (@a &lt; -10) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>导引可以无参数，也可以对参数进行比较运算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@media: mobile;</span><br><span class="line"></span><br><span class="line">.mixin (@a) when (@media = mobile) &#123; ... &#125;</span><br><span class="line">.mixin (@a) when (@media = desktop) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">.max (@a, @b) when (@a &gt; @b) &#123; width: @a &#125;</span><br><span class="line">.max (@a, @b) when (@a &lt; @b) &#123; width: @b &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果想基于值的类型进行匹配，可以使用is*函式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.mixin (@a, @b: 0) when (isnumber(@b)) &#123; ... &#125;</span><br><span class="line">.mixin (@a, @b: black) when (iscolor(@b)) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>常见的检测函式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">scolor</span><br><span class="line"></span><br><span class="line">isnumber</span><br><span class="line"></span><br><span class="line">isstring</span><br><span class="line"></span><br><span class="line">iskeyword</span><br><span class="line"></span><br><span class="line">isurl</span><br><span class="line"></span><br><span class="line">判断一个值是纯数字，还是某个单位量，可以使用下列函式：</span><br><span class="line"></span><br><span class="line">ispixel</span><br><span class="line"></span><br><span class="line">ispercentage</span><br><span class="line"></span><br><span class="line">isem</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用and关键字实现与条件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.mixin (@a) when (isnumber(@a)) and (@a &gt; 0) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用not关键字实现或条件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.mixin (@b) when not (@b &gt; 0) &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="嵌套规则"><a href="#嵌套规则" class="headerlink" title="嵌套规则"></a>嵌套规则</h3><ul>
+<li><p>以嵌套的方式编写层叠样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#header &#123;</span><br><span class="line">  color: black;</span><br><span class="line"></span><br><span class="line">  .navigation &#123;</span><br><span class="line">    font-size: 12px;</span><br><span class="line">  &#125;</span><br><span class="line">  .logo &#123;</span><br><span class="line">    width: 300px;</span><br><span class="line">    &amp;:hover &#123; text-decoration: none &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&amp;符号用于写串联选择器，而不是写后代选择器。这点对伪类尤其有用，如:hover和:focus</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.bordered &#123;</span><br><span class="line">  &amp;.float &#123;</span><br><span class="line">    float: left; </span><br><span class="line">  &#125;</span><br><span class="line">  .top &#123;</span><br><span class="line">    margin: 5px; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><ul>
+<li><p>任何数字、颜色或者变量都可以参与运算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@base: 5%;</span><br><span class="line">@filler: @base * 2;</span><br><span class="line">@other: @base + @filler;</span><br><span class="line"></span><br><span class="line">color: #888 / 4;</span><br><span class="line">background-color: @base-color + #111;</span><br><span class="line">height: 100% / 2 + @filler;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>less运算能够分辨出颜色和单位</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@var: 1px + 5;  //less会输出6px</span><br><span class="line"></span><br><span class="line">//括号也同样允许使用</span><br><span class="line">width: (@var + 5) * 2;</span><br><span class="line"></span><br><span class="line">//可以在复合属性中进行运算</span><br><span class="line">border: (@width * 2) solid black;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Color-函数"><a href="#Color-函数" class="headerlink" title="Color 函数"></a>Color 函数</h3><h3 id="Math-函数"><a href="#Math-函数" class="headerlink" title="Math 函数"></a>Math 函数</h3><ul>
+<li>less提供了一组方便的数学函数，可以使用它们处理一些数字类型的值<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">round(1.67); // returns `2`</span><br><span class="line">ceil(2.4);   // returns `3`</span><br><span class="line">floor(2.6);  // returns `2`</span><br><span class="line">percentage(0.5); // returns `50%`</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><ul>
+<li>为了更好组织CSS或者单纯是为了更好的封装，将一些变量或者混合模块打包起来<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#bundle &#123;</span><br><span class="line">  .button () &#123;</span><br><span class="line">    display: block;</span><br><span class="line">    border: 1px solid black;</span><br><span class="line">    background-color: grey;</span><br><span class="line">    &amp;:hover &#123; background-color: white &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  .tab &#123; ... &#125;</span><br><span class="line">  .citation &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;!-- 使用 --&gt;</span><br><span class="line">#header a &#123;</span><br><span class="line">  color: orange;</span><br><span class="line">  #bundle &gt; .button;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><ul>
+<li>less中的作用域跟其他编程语言非常类似，首先会从本地查找变量或者混合模块，如果没找到的话会去父级作用域中查找，直到找到为止<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@var: red;</span><br><span class="line"></span><br><span class="line">#page &#123;</span><br><span class="line">  @var: white;</span><br><span class="line">  #header &#123;</span><br><span class="line">    color: @var; // white</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#footer &#123;</span><br><span class="line">  color: @var; // red  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Importing"><a href="#Importing" class="headerlink" title="Importing"></a>Importing</h3><ul>
+<li><p>可以在main文件中通过下面的形势引入 .less 文件, .less 后缀可带可不带</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@import &quot;lib.less&quot;;</span><br><span class="line">@import &quot;lib&quot;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果想导入一个CSS文件而且不想less对它进行处理，只需要使用.css后缀就可以，这样less就会跳过它不去处理它</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@import &quot;lib.css&quot;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="字符串插值"><a href="#字符串插值" class="headerlink" title="字符串插值"></a>字符串插值</h3><ul>
+<li>变量可以用类似ruby和php的方式嵌入到字符串中<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@base-url: &quot;http://assets.fnord.com&quot;;</span><br><span class="line">background-image: url(&quot;@&#123;base-url&#125;/images/bg.png&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="JavaScript-表达式"><a href="#JavaScript-表达式" class="headerlink" title="JavaScript 表达式"></a>JavaScript 表达式</h3><ul>
+<li><p>JavaScript 表达式也可以在.less 文件中使用.，可以通过反引号的方式使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@var: `&quot;hello&quot;.toUpperCase() + &apos;!&apos;`;    //@var: &quot;HELLO!&quot;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>也可以同时使用字符串插值和避免编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@str: &quot;hello&quot;;</span><br><span class="line">@var: ~`&quot;@&#123;str&#125;&quot;.toUpperCase() + &apos;!&apos;`; //@var: HELLO!;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以访问JavaScript环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@height: `document.body.clientHeight`;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将一个JavaScript字符串解析成16进制的颜色值，可以使用 color 函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@color: color(`window.colors.baseColor`);</span><br><span class="line">@darkcolor: darken(@color, 10%);</span><br></pre></td></tr></table></figure></li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/27/less语法入门/" data-id="cjf9am9e20005ddxrlokm0qg3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/27/less语法入门/" data-id="cjf9bj58d0005a7xcwtvk5q5j" class="article-share-link">Share</a>
       
       
     </footer>
