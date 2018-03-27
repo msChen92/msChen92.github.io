@@ -60,3 +60,85 @@ title: js
 # 跨域的方法及原理
 
 #js中的事件委托
+
+#js中数组的一些方法
+- some:some() 方法用于检测数组中的元素是否满足指定条件（函数提供）相当于逻辑运算符 ||
+ + 如果有一个元素满足条件，则表达式返回true , 剩余的元素不会再执行检测。
+ + 如果没有满足条件的元素，则返回false
+ + 不会对空数组进行检测，不会改变原始数组
+
+---
+
+- every:当数组每个元素在判定函数中都返回true，则最终结果为true，相当于逻辑运算符 &&
+ + 如果数组中检测到有一个元素不满足，则整个表达式返回 false ，且剩余的元素不会再进行检测。
+ + 如果所有元素都满足条件，则返回 true
+ + 同some
+---
+
+- map:map() 方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值
+
+- filter
+- reduce
+- find
+- findIndex
+
+# DOM事件类型
+- DOM0 element.onclick=function(){}
+- DOM2 element.addEventListener('click',function(){},false)
+- DOM3 element.addEventListener('keyup',function(){},false)//增加了键盘事件等
+
+# 事件模型
+- 捕获：window > document > html > body > 目标元素
+- 冒泡
+- 事件流是什么？
+ + 第一阶段：捕获
+ + 第二阶段：目标阶段：事件通过捕获到达目标元素
+ + 第三阶段：目标元素上传到window元素：冒泡
+
+
+# DOM事件类
+### event对象常见应用
+- event.preventDefault()
+- event.stopPropagation()
+- event.stoplmmediatePropagation()//事件响应优先级
+	+ 一个按钮注册两个事件a和b,需求要a执行的时候，就不再执行b，给a加这个就可以成功阻止b的执行
+- event.currentTarget:当前绑定的事件，就是下面的父级元素
+- event.target
+	+ 比如很多个div，同时注册点击事件，给他们的父元素添加点击事件，e.target找到目标元素，兼容srcElement
+
+### 自定义事件
+```
+var eve = new Event('custome')
+ev.addEventListener('custome',function(){
+	console.log('custome')
+})
+ev.dispatchEvent(eve)
+```
+CustomeEvent可以添加参数数据{}
+```
+var eve = new CustomeEvent('事件名',{})
+```
+
+# 原型链
+## 创建对象的几种方法
+- 字面量方式
+```
+var o1 = {name:'o1'}
+var o2 = new Object({name:'o2'})
+```
+- 构造函数
+```
+var M = function(name){this.name = name}
+var o3 = new M('o3')
+这里的o3是实例对象
+这里的M是构造函数
+M.prototype是原型对象，原型对象中constructor的属性指向构造函数本身
+o3._proto_===M.prototype严格相等
+
+
+```
+- object.create
+```
+var p = {name : 'p'}
+var o4 = Object.create(p)
+```

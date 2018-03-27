@@ -1,4 +1,4 @@
-title: Http缓存机制
+title:  git 和 svn 的区别 
 ---
 # git 和 svn 的区别 
 ## git 是分布 式的版本控制系统
