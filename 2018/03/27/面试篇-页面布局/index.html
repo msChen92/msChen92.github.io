@@ -8,11 +8,11 @@
   <meta name="description" content="页面布局三栏布局左右宽度固定，中间自适应 方法一：绝对定位 方法二：浮动 方法三：flex布局 方法四：表格布局:父元素：display:table; 子元素：display:table-cell 方法五：网格布局:display:grid;1234567891011grid-template-rows:100px 100px 100px;指定网格中的行数以及高度grid-template-col">
 <meta property="og:type" content="article">
 <meta property="og:title" content="页面布局">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/面试篇-页面布局/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/03/27/面试篇-页面布局/index.html">
 <meta property="og:site_name" content="一个人的旅程">
 <meta property="og:description" content="页面布局三栏布局左右宽度固定，中间自适应 方法一：绝对定位 方法二：浮动 方法三：flex布局 方法四：表格布局:父元素：display:table; 子元素：display:table-cell 方法五：网格布局:display:grid;1234567891011grid-template-rows:100px 100px 100px;指定网格中的行数以及高度grid-template-col">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-22T06:16:28.067Z">
+<meta property="og:updated_time" content="2018-03-27T06:40:39.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="页面布局">
 <meta name="twitter:description" content="页面布局三栏布局左右宽度固定，中间自适应 方法一：绝对定位 方法二：浮动 方法三：flex布局 方法四：表格布局:父元素：display:table; 子元素：display:table-cell 方法五：网格布局:display:grid;1234567891011grid-template-rows:100px 100px 100px;指定网格中的行数以及高度grid-template-col">
@@ -66,8 +66,8 @@
       <div class="outer">
         <section id="main"><article id="post-面试篇-页面布局" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/面试篇-页面布局/" class="article-date">
-  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/03/27/面试篇-页面布局/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
 </a>
     
   </div>
@@ -95,11 +95,46 @@
 </li>
 </ul>
 <p>###上下高度固定，中间自适应</p>
-<h2 id="两栏布局"><a href="#两栏布局" class="headerlink" title="两栏布局"></a>两栏布局</h2><h3 id="左宽度固定，右自适应"><a href="#左宽度固定，右自适应" class="headerlink" title="左宽度固定，右自适应"></a>左宽度固定，右自适应</h3><h3 id="右宽度固定，左自适应"><a href="#右宽度固定，左自适应" class="headerlink" title="右宽度固定，左自适应"></a>右宽度固定，左自适应</h3><h3 id="上高度固定，下自适应"><a href="#上高度固定，下自适应" class="headerlink" title="上高度固定，下自适应"></a>上高度固定，下自适应</h3><h3 id="下高度固定，上自适应"><a href="#下高度固定，上自适应" class="headerlink" title="下高度固定，上自适应"></a>下高度固定，上自适应</h3>
+<h2 id="两栏布局"><a href="#两栏布局" class="headerlink" title="两栏布局"></a>两栏布局</h2><h3 id="左宽度固定，右自适应"><a href="#左宽度固定，右自适应" class="headerlink" title="左宽度固定，右自适应"></a>左宽度固定，右自适应</h3><h3 id="右宽度固定，左自适应"><a href="#右宽度固定，左自适应" class="headerlink" title="右宽度固定，左自适应"></a>右宽度固定，左自适应</h3><h3 id="上高度固定，下自适应"><a href="#上高度固定，下自适应" class="headerlink" title="上高度固定，下自适应"></a>上高度固定，下自适应</h3><h3 id="下高度固定，上自适应"><a href="#下高度固定，上自适应" class="headerlink" title="下高度固定，上自适应"></a>下高度固定，上自适应</h3><h1 id="什么是DOCTYPPE及作用"><a href="#什么是DOCTYPPE及作用" class="headerlink" title="什么是DOCTYPPE及作用"></a>什么是DOCTYPPE及作用</h1><ul>
+<li>DTD就是文档类型定义，根据这个来判读使用什么协议解析及切换浏览器模式</li>
+<li>DOCTYPE直接告诉浏览器什么是DTD</li>
+<li>DOCTYPE的类型有哪些？<ul>
+<li>html5 &lt;!DOCTYPE html&gt;</li>
+<li>html4.01 strict【不包括弃用元素和展示型的】和html4.01 transitional模式【包括展示性的和弃用元素】</li>
+</ul>
+</li>
+</ul>
+<h1 id="浏览器渲染过程"><a href="#浏览器渲染过程" class="headerlink" title="浏览器渲染过程"></a>浏览器渲染过程</h1><ul>
+<li>html + css +js</li>
+<li>html 经过html parse转成DOM tree </li>
+<li>css 通过css parse转换成style rules</li>
+<li>上面的DOM tree和style rules 进过attachement一结合 形成了 render tree</li>
+<li>render tree相当于告诉浏览器，结构差不多出来了，不包含具体内容，不知道这个位置是什么</li>
+<li>在render tree之前layout会精确计算到这些元素的宽高颜色位置等</li>
+<li>painting </li>
+<li>display</li>
+</ul>
+<p>#重排reflow</p>
+<ul>
+<li>dom结构中各个元素都有自己的盒子，这些需要浏览器根据样式来计算将元素放到他该出现的位置</li>
+</ul>
+<p>##触发reflow的情况</p>
+<ul>
+<li>增加，删除，修改DOM节点是，会导致重排重绘</li>
+<li>移动DOM的位置，或动画</li>
+<li>修改css样式</li>
+<li>resize窗口或滚动</li>
+<li>秀爱网页的默认字体</li>
+</ul>
+<p>#重绘</p>
+<h2 id="触发repaint"><a href="#触发repaint" class="headerlink" title="触发repaint"></a>触发repaint</h2><ul>
+<li>DOM改动和CSS改动</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/面试篇-页面布局/" data-id="cjf24ju6v000adbxh07tkt9jh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/27/面试篇-页面布局/" data-id="cjf9am9ei000dddxr100jn77y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -108,7 +143,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/03/22/面试篇-js/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/27/面试篇-js/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -117,6 +152,11 @@
       </div>
     </a>
   
+  
+    <a href="/2018/03/27/面试篇-页面性能/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">页面性能类</div>
+    </a>
   
 </nav>
 
@@ -152,23 +192,23 @@
       <ul>
         
           <li>
-            <a href="/2018/03/22/缓存实现/">Http缓存机制</a>
+            <a href="/2018/03/27/缓存实现/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/Http缓存机制/">Http缓存机制</a>
+            <a href="/2018/03/27/Http缓存机制/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/git和svn的区别/">Http缓存机制</a>
+            <a href="/2018/03/27/css盒模型/">css盒模型</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+            <a href="/2018/03/27/git和svn的区别/">git 和 svn 的区别</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/webpack/">Http缓存机制</a>
+            <a href="/2018/03/27/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
           </li>
         
       </ul>

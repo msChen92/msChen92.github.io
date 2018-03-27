@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>错误监控类 | 一个人的旅程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前端错误的分类 即时运行错误：代码错误 try catch window.onerror   资源加载错误【此类错误不会冒泡】 object.onerror performance.getEntires error事件捕获【监听事件的时候使用捕获】    跨域的js原型错误可以捕获么？错误提示什么，应该怎么处理？ 可以捕获到，错误提示Script error 怎么处理呢？ 在script标签上增加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="错误监控类">
+<meta property="og:url" content="http://yoursite.com/2018/03/27/面试-错误分类/index.html">
+<meta property="og:site_name" content="一个人的旅程">
+<meta property="og:description" content="前端错误的分类 即时运行错误：代码错误 try catch window.onerror   资源加载错误【此类错误不会冒泡】 object.onerror performance.getEntires error事件捕获【监听事件的时候使用捕获】    跨域的js原型错误可以捕获么？错误提示什么，应该怎么处理？ 可以捕获到，错误提示Script error 怎么处理呢？ 在script标签上增加">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-27T06:40:39.366Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="错误监控类">
+<meta name="twitter:description" content="前端错误的分类 即时运行错误：代码错误 try catch window.onerror   资源加载错误【此类错误不会冒泡】 object.onerror performance.getEntires error事件捕获【监听事件的时候使用捕获】    跨域的js原型错误可以捕获么？错误提示什么，应该怎么处理？ 可以捕获到，错误提示Script error 怎么处理呢？ 在script标签上增加">
+  
+    <link rel="alternate" href="/atom.xml" title="一个人的旅程" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">一个人的旅程</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-面试-错误分类" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/27/面试-错误分类/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      错误监控类
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前端错误的分类"><a href="#前端错误的分类" class="headerlink" title="前端错误的分类"></a>前端错误的分类</h1><ul>
+<li>即时运行错误：代码错误<ul>
+<li>try catch</li>
+<li>window.onerror</li>
+</ul>
+</li>
+<li>资源加载错误【此类错误不会冒泡】<ul>
+<li>object.onerror</li>
+<li>performance.getEntires</li>
+<li>error事件捕获【监听事件的时候使用捕获】</li>
+</ul>
+</li>
+</ul>
+<h3 id="跨域的js原型错误可以捕获么？错误提示什么，应该怎么处理？"><a href="#跨域的js原型错误可以捕获么？错误提示什么，应该怎么处理？" class="headerlink" title="跨域的js原型错误可以捕获么？错误提示什么，应该怎么处理？"></a>跨域的js原型错误可以捕获么？错误提示什么，应该怎么处理？</h3><ul>
+<li>可以捕获到，错误提示Script error</li>
+<li>怎么处理呢？<ul>
+<li>在script标签上增加crossorigin属性</li>
+<li>设置js资源响应头Access-Control-Allow-Origin</li>
+</ul>
+</li>
+</ul>
+<h3 id="上报错误的基本原理"><a href="#上报错误的基本原理" class="headerlink" title="上报错误的基本原理"></a>上报错误的基本原理</h3><ul>
+<li>采用ajax通信的方式上报</li>
+<li>利用image对象上报<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(new Image()).src = &apos;http://baidu.com/[上报的地址]&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/27/面试-错误分类/" data-id="cjf9am9ec000addxrbq4e0w5l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/27/静态资源优化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          静态资源优化方案
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/27/面试篇-css/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">css</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/27/缓存实现/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/27/Http缓存机制/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/27/css盒模型/">css盒模型</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/27/git和svn的区别/">git 和 svn 的区别</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/27/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 msChen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

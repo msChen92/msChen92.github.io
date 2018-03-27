@@ -8,11 +8,11 @@
   <meta name="description" content="js对象深浅克隆 浅复制：只会将对象的各个属性进行依次复制，并不会进行递归复制，而js存储对象都是存地址的，所以浅复制会导致obj.c和shallowCopy.c 指向同一块内存地址；会导致引用。 对象的深复制：它不仅将原对象的各个属性逐个复制出去，而且将原对象各个属性所包含的对象也依次采用深复制的方法递归复制到新对象上。这就不会存在上面obj和shallowCopy的c属性指向同一个对象的问题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/面试篇-js/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/03/27/面试篇-js/index.html">
 <meta property="og:site_name" content="一个人的旅程">
 <meta property="og:description" content="js对象深浅克隆 浅复制：只会将对象的各个属性进行依次复制，并不会进行递归复制，而js存储对象都是存地址的，所以浅复制会导致obj.c和shallowCopy.c 指向同一块内存地址；会导致引用。 对象的深复制：它不仅将原对象的各个属性逐个复制出去，而且将原对象各个属性所包含的对象也依次采用深复制的方法递归复制到新对象上。这就不会存在上面obj和shallowCopy的c属性指向同一个对象的问题。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-22T06:16:28.067Z">
+<meta property="og:updated_time" content="2018-03-27T06:40:39.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js">
 <meta name="twitter:description" content="js对象深浅克隆 浅复制：只会将对象的各个属性进行依次复制，并不会进行递归复制，而js存储对象都是存地址的，所以浅复制会导致obj.c和shallowCopy.c 指向同一块内存地址；会导致引用。 对象的深复制：它不仅将原对象的各个属性逐个复制出去，而且将原对象各个属性所包含的对象也依次采用深复制的方法递归复制到新对象上。这就不会存在上面obj和shallowCopy的c属性指向同一个对象的问题。">
@@ -66,8 +66,8 @@
       <div class="outer">
         <section id="main"><article id="post-面试篇-js" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/面试篇-js/" class="article-date">
-  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/03/27/面试篇-js/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
 </a>
     
   </div>
@@ -112,11 +112,79 @@
 </li>
 </ul>
 <h1 id="cookie-localStroage-sessionStroage-区别"><a href="#cookie-localStroage-sessionStroage-区别" class="headerlink" title="cookie,localStroage,sessionStroage 区别"></a>cookie,localStroage,sessionStroage 区别</h1><h1 id="跨域的方法及原理"><a href="#跨域的方法及原理" class="headerlink" title="跨域的方法及原理"></a>跨域的方法及原理</h1><p>#js中的事件委托</p>
+<p>#js中数组的一些方法</p>
+<ul>
+<li>some:some() 方法用于检测数组中的元素是否满足指定条件（函数提供）相当于逻辑运算符 ||<ul>
+<li>如果有一个元素满足条件，则表达式返回true , 剩余的元素不会再执行检测。</li>
+<li>如果没有满足条件的元素，则返回false</li>
+<li>不会对空数组进行检测，不会改变原始数组</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>every:当数组每个元素在判定函数中都返回true，则最终结果为true，相当于逻辑运算符 &amp;&amp;<ul>
+<li>如果数组中检测到有一个元素不满足，则整个表达式返回 false ，且剩余的元素不会再进行检测。</li>
+<li>如果所有元素都满足条件，则返回 true</li>
+<li>同some</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>map:map() 方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值</p>
+</li>
+<li><p>filter</p>
+</li>
+<li>reduce</li>
+<li>find</li>
+<li>findIndex</li>
+</ul>
+<h1 id="DOM事件类型"><a href="#DOM事件类型" class="headerlink" title="DOM事件类型"></a>DOM事件类型</h1><ul>
+<li>DOM0 element.onclick=function(){}</li>
+<li>DOM2 element.addEventListener(‘click’,function(){},false)</li>
+<li>DOM3 element.addEventListener(‘keyup’,function(){},false)//增加了键盘事件等</li>
+</ul>
+<h1 id="事件模型"><a href="#事件模型" class="headerlink" title="事件模型"></a>事件模型</h1><ul>
+<li>捕获：window &gt; document &gt; html &gt; body &gt; 目标元素</li>
+<li>冒泡</li>
+<li>事件流是什么？<ul>
+<li>第一阶段：捕获</li>
+<li>第二阶段：目标阶段：事件通过捕获到达目标元素</li>
+<li>第三阶段：目标元素上传到window元素：冒泡</li>
+</ul>
+</li>
+</ul>
+<h1 id="DOM事件类"><a href="#DOM事件类" class="headerlink" title="DOM事件类"></a>DOM事件类</h1><h3 id="event对象常见应用"><a href="#event对象常见应用" class="headerlink" title="event对象常见应用"></a>event对象常见应用</h3><ul>
+<li>event.preventDefault()</li>
+<li>event.stopPropagation()</li>
+<li>event.stoplmmediatePropagation()//事件响应优先级<ul>
+<li>一个按钮注册两个事件a和b,需求要a执行的时候，就不再执行b，给a加这个就可以成功阻止b的执行</li>
+</ul>
+</li>
+<li>event.currentTarget:当前绑定的事件，就是下面的父级元素</li>
+<li>event.target<ul>
+<li>比如很多个div，同时注册点击事件，给他们的父元素添加点击事件，e.target找到目标元素，兼容srcElement</li>
+</ul>
+</li>
+</ul>
+<h3 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var eve = new Event(&apos;custome&apos;)</span><br><span class="line">ev.addEventListener(&apos;custome&apos;,function()&#123;</span><br><span class="line">	console.log(&apos;custome&apos;)</span><br><span class="line">&#125;)</span><br><span class="line">ev.dispatchEvent(eve)</span><br></pre></td></tr></table></figure>
+<p>CustomeEvent可以添加参数数据{}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var eve = new CustomeEvent(&apos;事件名&apos;,&#123;&#125;)</span><br></pre></td></tr></table></figure></p>
+<h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><h2 id="创建对象的几种方法"><a href="#创建对象的几种方法" class="headerlink" title="创建对象的几种方法"></a>创建对象的几种方法</h2><ul>
+<li><p>字面量方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var o1 = &#123;name:&apos;o1&apos;&#125;</span><br><span class="line">var o2 = new Object(&#123;name:&apos;o2&apos;&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构造函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var M = function(name)&#123;this.name = name&#125;</span><br><span class="line">var o3 = new M(&apos;o3&apos;)</span><br><span class="line">这里的o3是实例对象</span><br><span class="line">这里的M是构造函数</span><br><span class="line">M.prototype是原型对象，原型对象中constructor的属性指向构造函数本身</span><br><span class="line">o3._proto_===M.prototype严格相等</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>object.create</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var p = &#123;name : &apos;p&apos;&#125;</span><br><span class="line">var o4 = Object.create(p)</span><br></pre></td></tr></table></figure></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/面试篇-js/" data-id="cjf24ju6t0009dbxhgby63qm9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/27/面试篇-js/" data-id="cjf9am9eg000cddxryuaag2qw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -125,7 +193,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/03/22/面试篇-css/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/27/面试篇-css/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -135,7 +203,7 @@
     </a>
   
   
-    <a href="/2018/03/22/面试篇-页面布局/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/03/27/面试篇-页面布局/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">页面布局</div>
     </a>
@@ -174,23 +242,23 @@
       <ul>
         
           <li>
-            <a href="/2018/03/22/缓存实现/">Http缓存机制</a>
+            <a href="/2018/03/27/缓存实现/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/Http缓存机制/">Http缓存机制</a>
+            <a href="/2018/03/27/Http缓存机制/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/git和svn的区别/">Http缓存机制</a>
+            <a href="/2018/03/27/css盒模型/">css盒模型</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+            <a href="/2018/03/27/git和svn的区别/">git 和 svn 的区别</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/webpack/">Http缓存机制</a>
+            <a href="/2018/03/27/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
           </li>
         
       </ul>

@@ -64,8 +64,8 @@
   
     <article id="post-缓存实现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/缓存实现/" class="article-date">
-  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/03/27/缓存实现/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/缓存实现/">Http缓存机制</a>
+      <a class="article-title" href="/2018/03/27/缓存实现/">Http缓存机制</a>
     </h1>
   
 
@@ -99,7 +99,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/缓存实现/" data-id="cjf24ju6n0005dbxhl0lflxx6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/27/缓存实现/" data-id="cjf9am9e80008ddxruo8p5rox" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,8 +111,8 @@
   
     <article id="post-Http缓存机制" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/Http缓存机制/" class="article-date">
-  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/03/27/Http缓存机制/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
 </a>
     
   </div>
@@ -123,7 +123,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/Http缓存机制/">Http缓存机制</a>
+      <a class="article-title" href="/2018/03/27/Http缓存机制/">Http缓存机制</a>
     </h1>
   
 
@@ -158,11 +158,140 @@
 <li>在响应头中2个事件字段Date和Last-Modified之间的时间插值取10%作为缓存时间周期</li>
 </ul>
 <p><a href="http://mp.weixin.qq.com/s/qOMO0LIdA47j3RjhbCWUEQ?utm_source=caibaojian.com" target="_blank" rel="noopener">more</a></p>
+<h3 id="http协议的主要特点："><a href="#http协议的主要特点：" class="headerlink" title="http协议的主要特点："></a>http协议的主要特点：</h3><ul>
+<li>简单快速：统一资源符是固定的的</li>
+<li>灵活：通过一个协议完成不同类型的传输</li>
+<li>无连接：连接一次就会断掉</li>
+<li>无状态：服务端无法记住两次连接的状态，会断掉</li>
+</ul>
+<h3 id="http报文组成部分"><a href="#http报文组成部分" class="headerlink" title="http报文组成部分"></a>http报文组成部分</h3><ul>
+<li>请求报文： 请求行[http方法，页面地址，http协议及版本] 请求头[key value需要什么内容版本] 空行 请求体</li>
+<li>响应报文： 状态行 响应头 空行 响应体</li>
+</ul>
+<h3 id="http方法"><a href="#http方法" class="headerlink" title="http方法"></a>http方法</h3><ul>
+<li>get</li>
+<li>post</li>
+<li>put</li>
+<li>delete</li>
+<li>head</li>
+<li>get和post的区别<ul>
+<li>get在浏览器回退时是无害的，但post会再次提交请求</li>
+<li>get请求会被浏览器主动缓存，但post不会，除非手动设置</li>
+<li>get请求在url中传送的参数室友长度限制的，而post没有限时</li>
+<li>get请求参数会被完整保留在浏览器历史记录中，但post参数不会被保留</li>
+<li>get比post更不安全，参数暴露在url上，不能用来传递敏感信息</li>
+<li>get参数通过url传递，post放在request body中</li>
+</ul>
+</li>
+</ul>
+<h3 id="http状态码"><a href="#http状态码" class="headerlink" title="http状态码"></a>http状态码</h3><ul>
+<li>1xx:指示信息-表示请求已接收，继续处理</li>
+<li>2xx:成功-表示请求已被成功接收</li>
+<li>3xx:重定向-要完成请求必须进行更进一步的操作</li>
+<li>4xx:客户端错误-请求有语法错误或请求无法实现</li>
+<li><p>5xx:服务器错误-服务器未能实现合法的请求</p>
+</li>
+<li><p>200 OK:客户端请求成功</p>
+</li>
+<li>206 : 客户发送一个带有Range头的GET请求，服务器完成了他</li>
+<li>301 : 所请求的页面已经转移至新的url</li>
+<li>302 : 锁清秋的页面已经临时转移至新的url</li>
+<li>304 : 客户端有缓冲的文档并发出一个条件性的请求，服务器告诉客户，原来缓冲的文档还可以继续使用</li>
+<li>403 : 对被请求页面的访问被禁止</li>
+<li>404 : 请求资源不存在</li>
+<li>500 : 服务器发生不可预期的错误</li>
+<li>503 : 请求未完成，服务器临时过载或当机，一段时间后可能恢复正常</li>
+</ul>
+<hr>
+<h1 id="http协议类"><a href="#http协议类" class="headerlink" title="http协议类"></a>http协议类</h1><h2 id="持久连接"><a href="#持久连接" class="headerlink" title="持久连接"></a>持久连接</h2><ul>
+<li>http协议采用’请求-应答’模式，当使用普通模式，即非keep-Alive模式时，每个请求/应答客户端和服务端都要新建一个连接，完成之后立即断开连接（http协议为无连接的协议 </li>
+<li>当使用Keep-Alive模式(持久连接，连接重用)时，keep-Alive功能使客户端到服务器端的连接持续有效，当出现对服务器的后继请求时，keep-Alive功能避免了建立或者重新建立连接</li>
+</ul>
+<h2 id="管线化"><a href="#管线化" class="headerlink" title="管线化"></a>管线化</h2><ul>
+<li>在持久连接情况下，某个连接上消息的传递类似于 请求1 -&gt; 响应1 -&gt; 请求2 -&gt; 响应2 -&gt; 请求3 -&gt; 响应3</li>
+<li>管线化就是在某个连接上的消息变成类似这样： 请求1 -&gt; 请求2 -&gt; 请求3 -&gt; 响应1 -&gt; 响应2 -&gt; 响应3</li>
+</ul>
+<p>###管线化的特点</p>
+<ul>
+<li>管线化机制只有通过持久连接完成仅http1.1支持此技术 </li>
+<li>只有get和head请求可以管线化，post有所限制</li>
+<li>初次创建连接时不应启动管线机制，因为对方服务器不一定支持http1.1版本的协议</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/Http缓存机制/" data-id="cjf24ju660000dbxh8vbc6ux1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/27/Http缓存机制/" data-id="cjf9am9di0000ddxrel0pin20" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-css盒模型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/27/css盒模型/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/27/css盒模型/">css盒模型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="css盒模型"><a href="#css盒模型" class="headerlink" title="css盒模型"></a>css盒模型</h1><h2 id="IE模型"><a href="#IE模型" class="headerlink" title="IE模型"></a>IE模型</h2><ul>
+<li>宽度指的是content+padding+border</li>
+<li>box-sizing:border-box</li>
+</ul>
+<h2 id="标准模型"><a href="#标准模型" class="headerlink" title="标准模型"></a>标准模型</h2><ul>
+<li>宽度指的是content</li>
+<li>box-sizing:content-box</li>
+</ul>
+<h2 id="BFC盒模型"><a href="#BFC盒模型" class="headerlink" title="BFC盒模型"></a>BFC盒模型</h2><h3 id="BFC的特性"><a href="#BFC的特性" class="headerlink" title="BFC的特性"></a>BFC的特性</h3><ul>
+<li>内部Box会在垂直方向，从顶部开始一个接一个的放置</li>
+<li>box垂直方向的距离由margin决定，属于同一个BFC的相邻box的margin会发生叠加</li>
+<li>每个元素的margin box的左边,与包含块border box的左边相接触,即使浮动也是如此</li>
+<li>BFC的区域不会与float box叠加</li>
+<li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响外面的元素，反之亦然</li>
+<li>计算BFC的高度,浮动元素也参与计算 </li>
+</ul>
+<h3 id="如何触发BFC"><a href="#如何触发BFC" class="headerlink" title="如何触发BFC"></a>如何触发BFC</h3><ul>
+<li>float除了none以外的值</li>
+<li>overflow 除了visible以外的值(hidden,auto,scroll)</li>
+<li>display(table-cell,table-caption,inline-block,flex,inline-flex)</li>
+<li>position值为（absolute,fixed)</li>
+<li>fieldset元素</li>
+</ul>
+<h3 id="BFC应用场景"><a href="#BFC应用场景" class="headerlink" title="BFC应用场景"></a>BFC应用场景</h3><ul>
+<li>解决margin叠加问题<ul>
+<li>3个p元素之间距离为50px,发生外边距叠加,解决这个叠加问题是的每个p之间是100px,可以创建BFC，给p元素添加一个父元素，让他触发BFC</li>
+</ul>
+</li>
+<li><p>用于布局：两栏自适应高度之类的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt; </span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;BFC&lt;/title&gt;</span><br><span class="line">        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot;/&gt;</span><br><span class="line">        &lt;style&gt;</span><br><span class="line">            .floatLeft,.floatRight &#123;</span><br><span class="line">                width:100px;</span><br><span class="line">                height:100px;</span><br><span class="line">            &#125;</span><br><span class="line">            .floatLeft &#123;</span><br><span class="line">                /*左浮动触发BFC*/</span><br><span class="line">                float:left;</span><br><span class="line">                background:green;</span><br><span class="line">            &#125;</span><br><span class="line">            .floatRight &#123;</span><br><span class="line">                /*右浮动触发BFC*/</span><br><span class="line">                float:right;</span><br><span class="line">                background:yellow;</span><br><span class="line">            &#125;</span><br><span class="line">            .bfcContent &#123;</span><br><span class="line">                /*table-cell触发BFC*/</span><br><span class="line">                display:table-cell;</span><br><span class="line">                width:9000px;/*宽度大到屏幕宽度即可*/</span><br><span class="line">                /*hack手段，针对IE6、7*/</span><br><span class="line">                *display:inline-block;</span><br><span class="line">                *width:auto;</span><br><span class="line">                height:100px;</span><br><span class="line">                background:pink;</span><br><span class="line">            &#125; </span><br><span class="line">        &lt;/style&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;div class=&quot;floatLeft&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;floatRight&quot;&gt;&lt;/div&gt;</span><br><span class="line">        &lt;div class=&quot;bfcContent bfcContentStl&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>清除浮动</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/27/css盒模型/" data-id="cjf9am9dw0002ddxrllw580xt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -174,8 +303,8 @@
   
     <article id="post-git和svn的区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/git和svn的区别/" class="article-date">
-  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/03/27/git和svn的区别/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
 </a>
     
   </div>
@@ -186,7 +315,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/git和svn的区别/">Http缓存机制</a>
+      <a class="article-title" href="/2018/03/27/git和svn的区别/">git 和 svn 的区别</a>
     </h1>
   
 
@@ -212,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/git和svn的区别/" data-id="cjf24ju6h0002dbxheuplyk6b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/27/git和svn的区别/" data-id="cjf9am9dy0003ddxrl12ljzqm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -224,8 +353,8 @@
   
     <article id="post-http协商缓存VS强缓存" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/http协商缓存VS强缓存/" class="article-date">
-  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/03/27/http协商缓存VS强缓存/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
 </a>
     
   </div>
@@ -236,7 +365,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+      <a class="article-title" href="/2018/03/27/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
     </h1>
   
 
@@ -294,7 +423,62 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/http协商缓存VS强缓存/" data-id="cjf24ju6j0003dbxhzupg8qav" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/27/http协商缓存VS强缓存/" data-id="cjf9am9e00004ddxr5npo184b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-less语法入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/27/less语法入门/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/27/less语法入门/">less语法入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="less语法入门"><a href="#less语法入门" class="headerlink" title="less语法入门"></a>less语法入门</h1><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@nice-blue: #5B83AD;</span><br><span class="line">@light-blue: @nice-blue + #111;</span><br><span class="line"></span><br><span class="line">#header &#123; color: @light-blue; &#125;</span><br><span class="line"></span><br><span class="line">&lt;!-- 解析后 --&gt;</span><br><span class="line">#header &#123; color: #6c94be; &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="混合"><a href="#混合" class="headerlink" title="混合"></a>混合</h3><ul>
+<li>定义一些通用的属性集为一个class，然后在另一个class中去调用这些属性。任何class, id 或者元素属性集都可以以同样的方式引入<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.bordered &#123;</span><br><span class="line">  border-top: dotted 1px black;</span><br><span class="line">  border-bottom: solid 2px black;</span><br><span class="line">&#125;</span><br><span class="line">#menu a &#123;</span><br><span class="line">  color: #111;</span><br><span class="line">  .bordered;</span><br><span class="line">&#125;</span><br><span class="line">.post a &#123;</span><br><span class="line">  color: red;</span><br><span class="line">  .bordered;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;!-- 解析后 --&gt;</span><br><span class="line">#menu a &#123;</span><br><span class="line">  color: #111;</span><br><span class="line">  border-top: dotted 1px black;</span><br><span class="line">  border-bottom: solid 2px black;</span><br><span class="line">&#125;</span><br><span class="line">.post a &#123;</span><br><span class="line">  color: red;</span><br><span class="line">  border-top: dotted 1px black;</span><br><span class="line">  border-bottom: solid 2px black;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="带参数混合"><a href="#带参数混合" class="headerlink" title="带参数混合"></a>带参数混合</h3><ul>
+<li><p>可以像函数一样定义一个带参数的属性集合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.border-radius (@radius) &#123;</span><br><span class="line">  border-radius: @radius;</span><br><span class="line">  -moz-border-radius: @radius;</span><br><span class="line">  -webkit-border-radius: @radius;</span><br><span class="line">&#125;</span><br><span class="line">#header &#123;</span><br><span class="line">  .border-radius(4px);</span><br><span class="line">&#125;</span><br><span class="line">.button &#123;</span><br><span class="line">  .border-radius(6px);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以给参数设置默认值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.border-radius (@radius: 5px) &#123;</span><br><span class="line">  border-radius: @radius;</span><br><span class="line">  -moz-border-radius: @radius;</span><br><span class="line">  -webkit-border-radius: @radius;</span><br><span class="line">&#125;</span><br><span class="line">#header &#123;</span><br><span class="line">  .border-radius;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以定义不带参数属性集合，用于隐藏这个属性集合，不让他暴露到css中去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">.wrap () &#123;</span><br><span class="line">  text-wrap: wrap;</span><br><span class="line">  white-space: pre-wrap;</span><br><span class="line">  white-space: -moz-pre-wrap;</span><br><span class="line">  word-wrap: break-word;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">pre &#123; .wrap &#125;</span><br><span class="line">&lt;!-- 解析结果 --&gt;</span><br><span class="line">pre &#123;</span><br><span class="line">  text-wrap: wrap;</span><br><span class="line">  white-space: pre-wrap;</span><br><span class="line">  white-space: -moz-pre-wrap;</span><br><span class="line">  word-wrap: break-word;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@arguments包含了所有传递进来的参数.不必单独处理每一个参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) &#123;</span><br><span class="line">  box-shadow: @arguments;</span><br><span class="line">  -moz-box-shadow: @arguments;</span><br><span class="line">  -webkit-box-shadow: @arguments;</span><br><span class="line">&#125;</span><br><span class="line">.box-shadow(2px, 5px);</span><br><span class="line">&lt;!-- 解析结果 --&gt;</span><br><span class="line">box-shadow: 2px 5px 1px #000;</span><br><span class="line">  -moz-box-shadow: 2px 5px 1px #000;</span><br><span class="line">  -webkit-box-shadow: 2px 5px 1px #000;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/27/less语法入门/" data-id="cjf9am9e20005ddxrlokm0qg3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -306,8 +490,8 @@
   
     <article id="post-webpack" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/webpack/" class="article-date">
-  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/03/27/webpack/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
 </a>
     
   </div>
@@ -318,7 +502,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/webpack/">Http缓存机制</a>
+      <a class="article-title" href="/2018/03/27/webpack/">webpack</a>
     </h1>
   
 
@@ -405,7 +589,57 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/webpack/" data-id="cjf24ju6l0004dbxh062aits6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/27/webpack/" data-id="cjf9am9e40006ddxry5y5lsgg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/27/算法/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/27/算法/">算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
+<li><p>冒泡排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function bubbleSort(arr) &#123;</span><br><span class="line">    var len = arr.length;</span><br><span class="line">    for (var i = 0; i &lt; len; i++) &#123;</span><br><span class="line">        for (var j = 0; j &lt; len - 1 - i; j++) &#123;</span><br><span class="line">            if (arr[j] &gt; arr[j+1]) &#123;        //相邻元素两两对比</span><br><span class="line">                var temp = arr[j+1];        //元素交换</span><br><span class="line">                arr[j+1] = arr[j];</span><br><span class="line">                arr[j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function selectionSort(arr) &#123;</span><br><span class="line">    var len = arr.length;</span><br><span class="line">    var minIndex, temp;</span><br><span class="line">    for (var i = 0; i &lt; len - 1; i++) &#123;</span><br><span class="line">        minIndex = i;</span><br><span class="line">        for (var j = i + 1; j &lt; len; j++) &#123;</span><br><span class="line">            if (arr[j] &lt; arr[minIndex]) &#123;     //寻找最小的数</span><br><span class="line">                minIndex = j;                 //将最小数的索引保存</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        temp = arr[i];</span><br><span class="line">        arr[i] = arr[minIndex];</span><br><span class="line">        arr[minIndex] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>计数排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">- 快速排序</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 插入排序</span><br></pre></td></tr></table></figure>
+<p>function insertionSort(arr) {<br>    var len = arr.length;<br>    var preIndex, current;<br>    for (var i = 1; i &lt; len; i++) {<br>        preIndex = i - 1;<br>        current = arr[i];<br>        while(preIndex &gt;= 0 &amp;&amp; arr[preIndex] &gt; current) {<br>            arr[preIndex+1] = arr[preIndex];<br>            preIndex–;<br>        }<br>        arr[preIndex+1] = current;<br>    }<br>    return arr;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 归并排序</span><br></pre></td></tr></table></figure></p>
+<h2 id=""><a href="#" class="headerlink" title="`"></a><code>`</code></h2><h2 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h2><hr>
+<h2 id="翻转二叉树"><a href="#翻转二叉树" class="headerlink" title="翻转二叉树"></a>翻转二叉树</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/27/算法/" data-id="cjf9am9e60007ddxr7myb1h7h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -417,8 +651,8 @@
   
     <article id="post-XSS攻击和csrf攻击" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/XSS攻击和csrf攻击/" class="article-date">
-  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/03/27/XSS攻击和csrf攻击/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
 </a>
     
   </div>
@@ -429,7 +663,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/XSS攻击和csrf攻击/">XSS攻击和csrf攻击</a>
+      <a class="article-title" href="/2018/03/27/XSS攻击和csrf攻击/">XSS攻击和csrf攻击</a>
     </h1>
   
 
@@ -499,57 +733,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/XSS攻击和csrf攻击/" data-id="cjf24ju6e0001dbxhnakzsu0z" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-算法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/22/算法/" class="article-date">
-  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/算法/">算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
-<li><p>冒泡排序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function bubbleSort(arr) &#123;</span><br><span class="line">    var len = arr.length;</span><br><span class="line">    for (var i = 0; i &lt; len; i++) &#123;</span><br><span class="line">        for (var j = 0; j &lt; len - 1 - i; j++) &#123;</span><br><span class="line">            if (arr[j] &gt; arr[j+1]) &#123;        //相邻元素两两对比</span><br><span class="line">                var temp = arr[j+1];        //元素交换</span><br><span class="line">                arr[j+1] = arr[j];</span><br><span class="line">                arr[j] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>选择排序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function selectionSort(arr) &#123;</span><br><span class="line">    var len = arr.length;</span><br><span class="line">    var minIndex, temp;</span><br><span class="line">    for (var i = 0; i &lt; len - 1; i++) &#123;</span><br><span class="line">        minIndex = i;</span><br><span class="line">        for (var j = i + 1; j &lt; len; j++) &#123;</span><br><span class="line">            if (arr[j] &lt; arr[minIndex]) &#123;     //寻找最小的数</span><br><span class="line">                minIndex = j;                 //将最小数的索引保存</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        temp = arr[i];</span><br><span class="line">        arr[i] = arr[minIndex];</span><br><span class="line">        arr[minIndex] = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    return arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>计数排序</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">- 快速排序</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 插入排序</span><br></pre></td></tr></table></figure>
-<p>function insertionSort(arr) {<br>    var len = arr.length;<br>    var preIndex, current;<br>    for (var i = 1; i &lt; len; i++) {<br>        preIndex = i - 1;<br>        current = arr[i];<br>        while(preIndex &gt;= 0 &amp;&amp; arr[preIndex] &gt; current) {<br>            arr[preIndex+1] = arr[preIndex];<br>            preIndex–;<br>        }<br>        arr[preIndex+1] = current;<br>    }<br>    return arr;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- 归并排序</span><br></pre></td></tr></table></figure></p>
-<h2 id=""><a href="#" class="headerlink" title="`"></a><code>`</code></h2><h2 id="二分查找法"><a href="#二分查找法" class="headerlink" title="二分查找法"></a>二分查找法</h2><hr>
-<h2 id="翻转二叉树"><a href="#翻转二叉树" class="headerlink" title="翻转二叉树"></a>翻转二叉树</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/算法/" data-id="cjf24ju6p0006dbxhoqkr2des" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/27/XSS攻击和csrf攻击/" data-id="cjf9am9ds0001ddxr1v18frtc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -561,8 +745,8 @@
   
     <article id="post-静态资源优化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/静态资源优化/" class="article-date">
-  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/03/27/静态资源优化/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
 </a>
     
   </div>
@@ -573,7 +757,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/静态资源优化/">Http缓存机制</a>
+      <a class="article-title" href="/2018/03/27/静态资源优化/">静态资源优化方案</a>
     </h1>
   
 
@@ -588,120 +772,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/静态资源优化/" data-id="cjf24ju6q0007dbxhcyle4v8l" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-面试篇-css" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/22/面试篇-css/" class="article-date">
-  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/面试篇-css/">css</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="css哪些样式可以被继承"><a href="#css哪些样式可以被继承" class="headerlink" title="css哪些样式可以被继承"></a>css哪些样式可以被继承</h1><ul>
-<li>字体系列属性：font  font-family font-weight font-size  font-style</li>
-<li>文本系列属性：text-indent text-align line-height word-spacing text-tranform color</li>
-<li>元素可见性：visibility</li>
-<li>光标水性：cursor</li>
-</ul>
-<h1 id="rem的原理"><a href="#rem的原理" class="headerlink" title="rem的原理"></a>rem的原理</h1><h2 id="首先理解em和px"><a href="#首先理解em和px" class="headerlink" title="首先理解em和px"></a>首先理解em和px</h2><ul>
-<li>px和em都是长度单位，区别是，px的值是固定的，指定是多少就是多少，计算比较容易。em的值不是固定的，并且em会继承父级元素的字体大小。浏览器的默认字体高都是16px。所以未经调整的浏览器都符合: 1em=16px。那么12px=0.75em, 10px=0.625em。</li>
-<li>em是为字体而生的</li>
-<li>rem布局的本质是等比缩放，一般是基于宽度<ul>
-<li>rem是相对单位：相对的是html根元素，em是相对于父元素</li>
-</ul>
-</li>
-<li>比rem更好的方案：vw(视口的宽度的1/100) 和vh(视口高度的1/100)<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*rem方案*/</span><br><span class="line">html&#123;font-size:width/100&#125;//js获取宽度</span><br><span class="line">p&#123;width:15.625rem&#125;</span><br><span class="line">/*vw方案*/</span><br><span class="line">p&#123;width:15.625vw&#125;//不需要js，但是兼容性差</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/面试篇-css/" data-id="cjf24ju6s0008dbxhh1fhcpvb" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-面试篇-js" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/22/面试篇-js/" class="article-date">
-  <time datetime="2018-03-22T06:16:28.067Z" itemprop="datePublished">2018-03-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/面试篇-js/">js</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="js对象深浅克隆"><a href="#js对象深浅克隆" class="headerlink" title="js对象深浅克隆"></a>js对象深浅克隆</h1><ul>
-<li>浅复制：只会将对象的各个属性进行依次复制，并不会进行递归复制，而js存储对象都是存地址的，所以浅复制会导致obj.c和shallowCopy.c 指向同一块内存地址；会导致引用。</li>
-<li>对象的深复制：它不仅将原对象的各个属性逐个复制出去，而且将原对象各个属性所包含的对象也依次采用深复制的方法递归复制到新对象上。这就不会存在上面obj和shallowCopy的c属性指向同一个对象的问题。<br>最核心的思想还是采用递归的方式，不断进行，直到基本数据类型后，再复制</li>
-</ul>
-<h1 id="js中的this"><a href="#js中的this" class="headerlink" title="js中的this"></a>js中的this</h1><p>##js中的this指向</p>
-<ul>
-<li>全局作用域或者普遍函数中this指向全局对象window</li>
-<li>方调用中谁调用this指向谁</li>
-<li>在构造函数或这个构造函数原型对象中this指向构造函数的实例(不适用new是指向window的)</li>
-</ul>
-<h2 id="call-apply-bind"><a href="#call-apply-bind" class="headerlink" title="call / apply / bind"></a>call / apply / bind</h2><ul>
-<li><p>call:第一个参数如果是null的话，this就会指向window</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;</span><br><span class="line">    user:&quot;追梦子&quot;,</span><br><span class="line">    fn:function(e,ee)&#123;</span><br><span class="line">        console.log(this.user); //追梦子</span><br><span class="line">        console.log(e+ee); //3</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b = a.fn;</span><br><span class="line">b.call(a,1,2);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>apply的第二个参数必须是数组,第一个参数如果是null的话，this就会指向window</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;</span><br><span class="line">    user:&quot;追梦子&quot;,</span><br><span class="line">    fn:function(e,ee)&#123;</span><br><span class="line">        console.log(this.user); //追梦子</span><br><span class="line">        console.log(e+ee); //11</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b = a.fn;</span><br><span class="line">b.apply(a,[10,1]);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>bind:bind方法返回的是一个修改过后的函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123;</span><br><span class="line">    user:&quot;追梦子&quot;,</span><br><span class="line">    fn:function(e,d,f)&#123;</span><br><span class="line">        console.log(this.user); //追梦子</span><br><span class="line">        console.log(e,d,f); //10 1 2</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var b = a.fn;</span><br><span class="line">var c = b.bind(a,10);</span><br><span class="line">c(1,2);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>区别：call和apply都是改变上下文中的this并立即执行这个函数，bind方法可以让对应的函数想什么时候调就什么时候调用，并且可以将参数在执行的时候添加，这是它们的区别</p>
-</li>
-</ul>
-<h1 id="cookie-localStroage-sessionStroage-区别"><a href="#cookie-localStroage-sessionStroage-区别" class="headerlink" title="cookie,localStroage,sessionStroage 区别"></a>cookie,localStroage,sessionStroage 区别</h1><h1 id="跨域的方法及原理"><a href="#跨域的方法及原理" class="headerlink" title="跨域的方法及原理"></a>跨域的方法及原理</h1><p>#js中的事件委托</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/面试篇-js/" data-id="cjf24ju6t0009dbxhgby63qm9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/27/静态资源优化/" data-id="cjf9am9ea0009ddxr873sfjfb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -745,23 +816,23 @@
       <ul>
         
           <li>
-            <a href="/2018/03/22/缓存实现/">Http缓存机制</a>
+            <a href="/2018/03/27/缓存实现/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/Http缓存机制/">Http缓存机制</a>
+            <a href="/2018/03/27/Http缓存机制/">Http缓存机制</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/git和svn的区别/">Http缓存机制</a>
+            <a href="/2018/03/27/css盒模型/">css盒模型</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+            <a href="/2018/03/27/git和svn的区别/">git 和 svn 的区别</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/webpack/">Http缓存机制</a>
+            <a href="/2018/03/27/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
           </li>
         
       </ul>

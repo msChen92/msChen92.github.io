@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>页面性能类 | 一个人的旅程</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="页面性能类资源压缩合并，减少http请求非核心代码异步加载-&amp;gt;异步加载方式-&amp;gt;异步加载的区别 异步加载的方式 动态脚本加载 defer[script标签上]:在html解析完之后才会执行，如果是多个，按照加载的顺序依次执行 async[script标签上]：在加载完之后立即执行，如果多个，执行顺序与挤在顺序无关    利用浏览器缓存-&amp;gt;缓存的分类-&amp;gt;缓存的原理 缓存分类：强">
+<meta property="og:type" content="article">
+<meta property="og:title" content="页面性能类">
+<meta property="og:url" content="http://yoursite.com/2018/03/27/面试篇-页面性能/index.html">
+<meta property="og:site_name" content="一个人的旅程">
+<meta property="og:description" content="页面性能类资源压缩合并，减少http请求非核心代码异步加载-&amp;gt;异步加载方式-&amp;gt;异步加载的区别 异步加载的方式 动态脚本加载 defer[script标签上]:在html解析完之后才会执行，如果是多个，按照加载的顺序依次执行 async[script标签上]：在加载完之后立即执行，如果多个，执行顺序与挤在顺序无关    利用浏览器缓存-&amp;gt;缓存的分类-&amp;gt;缓存的原理 缓存分类：强">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-27T06:40:39.366Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="页面性能类">
+<meta name="twitter:description" content="页面性能类资源压缩合并，减少http请求非核心代码异步加载-&amp;gt;异步加载方式-&amp;gt;异步加载的区别 异步加载的方式 动态脚本加载 defer[script标签上]:在html解析完之后才会执行，如果是多个，按照加载的顺序依次执行 async[script标签上]：在加载完之后立即执行，如果多个，执行顺序与挤在顺序无关    利用浏览器缓存-&amp;gt;缓存的分类-&amp;gt;缓存的原理 缓存分类：强">
+  
+    <link rel="alternate" href="/atom.xml" title="一个人的旅程" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">一个人的旅程</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-面试篇-页面性能" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/27/面试篇-页面性能/" class="article-date">
+  <time datetime="2018-03-27T06:40:39.366Z" itemprop="datePublished">2018-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      页面性能类
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="页面性能类"><a href="#页面性能类" class="headerlink" title="页面性能类"></a>页面性能类</h1><h2 id="资源压缩合并，减少http请求"><a href="#资源压缩合并，减少http请求" class="headerlink" title="资源压缩合并，减少http请求"></a>资源压缩合并，减少http请求</h2><h2 id="非核心代码异步加载-gt-异步加载方式-gt-异步加载的区别"><a href="#非核心代码异步加载-gt-异步加载方式-gt-异步加载的区别" class="headerlink" title="非核心代码异步加载-&gt;异步加载方式-&gt;异步加载的区别"></a>非核心代码异步加载-&gt;异步加载方式-&gt;异步加载的区别</h2><ul>
+<li>异步加载的方式<ul>
+<li>动态脚本加载</li>
+<li>defer[script标签上]:在html解析完之后才会执行，如果是多个，按照加载的顺序依次执行</li>
+<li>async[script标签上]：在加载完之后立即执行，如果多个，执行顺序与挤在顺序无关</li>
+</ul>
+</li>
+</ul>
+<h2 id="利用浏览器缓存-gt-缓存的分类-gt-缓存的原理"><a href="#利用浏览器缓存-gt-缓存的分类-gt-缓存的原理" class="headerlink" title="利用浏览器缓存-&gt;缓存的分类-&gt;缓存的原理"></a>利用浏览器缓存-&gt;缓存的分类-&gt;缓存的原理</h2><ul>
+<li>缓存分类：强缓存和协商缓存</li>
+</ul>
+<h2 id="使用CDN-让网络快速到达服务端将网页下载下来"><a href="#使用CDN-让网络快速到达服务端将网页下载下来" class="headerlink" title="使用CDN[让网络快速到达服务端将网页下载下来]"></a>使用CDN[让网络快速到达服务端将网页下载下来]</h2><h2 id="预解析DNS"><a href="#预解析DNS" class="headerlink" title="预解析DNS"></a>预解析DNS</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta http-equiv=&quot;x-dns-prefetch-control&quot; content=&quot;on&quot;&gt;//https协议中强制打开dns预解析</span><br><span class="line">&lt;link rel=&quot;dns-prefetch&quot; href=&quot;//host_name_to_prefetch.com&quot;&gt;//dns预解析</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/27/面试篇-页面性能/" data-id="cjf9am9ek000eddxr390k59pw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/27/面试篇-页面布局/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          页面布局
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/27/面试问题总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">面试问题总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/27/缓存实现/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/27/Http缓存机制/">Http缓存机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/27/css盒模型/">css盒模型</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/27/git和svn的区别/">git 和 svn 的区别</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/27/http协商缓存VS强缓存/">http协商缓存VS强缓存</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 msChen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
